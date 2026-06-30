@@ -1,0 +1,19 @@
+* { box-sizing: border-box; }
+
+.first {
+  background-color: #ffe0e0;
+  padding: 10px;
+  margin-bottom: 40px;
+}
+
+.second {
+  background-color: #e0e0ff;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+/*
+the actual gap is 40 px not 60 px.
+Beacuse,the vertical margins collapse,so only the larger margin is used.
+Margin collapse does not happen with flexbox,grid, or absolutely positioned elements.
+*/

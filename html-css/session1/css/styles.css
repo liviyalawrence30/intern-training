@@ -1,0 +1,60 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding:20 px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+/*
+The stylesheet is linked in the '<head>' because the browser loads and applies the css before rendering the page.
+It prevents unstyled content to be displayed in the page. */
+
+h2{
+    color:lightblue;
+    padding-bottom: 5px;
+}
+.highlight{
+    background-color:lightpink;
+    padding: 5px;
+    border-radius:5px;
+
+}
+#contact-section{
+    background-color: bisque;
+    padding:10px;
+    border-radius: 5px;
+}
+
+/* 
+when the class selector and the tag selector targets the same element,the class selector gets the high priority.
+The class selector wins and it's style is displayed.
+*/
+
+p{
+    color:black;
+}
+.intro-text{
+    color:blue;
+}
+#about-paragraph{
+    color:green;
+}
+/* 
+The paragraph color is green beacuse the id selector get more priority over the class selector.
+To make the 'p' tag rule win, we should remove the class and id selector or resolve the conflicting id rule with the 'p' tag.
+tag selector has the lowest priority,class selector has medium priority, id selector has the highest priority.
+*/
+
+nav{
+    margin-top: 10px;
+}
+nav a{
+    margin-right: 10px;
+    color:purple;
+    text-decoration: dashed;
+}
+

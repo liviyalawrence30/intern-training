@@ -1,0 +1,62 @@
+.border-box{
+    border:3px solid blue;
+    padding: 20px;
+    margin: 20px auto;
+}
+.outline-box{
+    outline: 3px solid red;
+    padding:20 px;
+    margin: 20 px;
+}
+/*
+Border is part of the box model and affects the element's size.
+Outline is drawn outside the border and does not affect the element's size.
+It is commonly used to highlight the selected elements.*/
+.hidden-box,none-box{
+    width:250px;
+    padding:20px;
+    margin: 10px 0;
+    background-color: lightblue;
+    border:1px solid black;
+}
+.hidden-box{
+    visibility: hidden;
+}
+.none-box{
+    display:none;
+}
+/*
+visibility:hidden hides the element but keeps its space.
+display:none hides the element and removes it from the page layout.
+*/
+body{
+    max-width: 800px;
+    padding:20px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* max-width limits the maximum width of the page to 800 px.
+This makes the content easier to read on large screens while allowing to shrink on smaller screens.*/
+
+.overflow-hidden,
+.overflow-scroll,
+.overflow-auto{
+    width:300px;
+    height: 80px;
+    border: 2px solid black;
+    margin:20 px 0;
+    padding:10px;
+}
+.overflow-hidden{
+    overflow:hidden;
+}
+.overflow-scroll{
+    overflow:scroll;
+}
+.overflow-auto{
+    overflow:auto;
+}
+/* 
+overflow:hidden hides the extra content 
+overflow:scroll always show scrollbars 
+overflow:auto shows scrollbars only when needed.*/
