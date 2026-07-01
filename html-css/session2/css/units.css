@@ -1,0 +1,52 @@
+.box-px {
+    width: 300px;
+    background: #f0f4ff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #000;
+}
+
+.box-percent {
+    width: 50%;
+    background: #fff0f4;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #000;
+}
+
+.box-rem {
+    width: 20rem;
+    background: #f0fff4;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #000;
+}
+
+.box-vw {
+    width: 60vw;
+    background: #fffbf0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #000;
+}
+
+/* px is best for fixed sized elements where an exact width is needed.
+rem is better for scalable layouts that respect the root font size.
+% is useful when the element should resize relative to its parent container.*/
+
+html {
+    font-size: 16px;
+}
+.font-demo {
+    font-size: 12px;
+}
+.px-text {
+    font-size: 16px;
+}
+.rem-text {
+    font-size: 1rem;
+}
+.em-text {
+    font-size: 1.5em;
+}
+/* rem is based on the root font size, while em is based on the font size of the parent element. */

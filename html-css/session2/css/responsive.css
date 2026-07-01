@@ -1,0 +1,75 @@
+.responsive-box {
+  background: #fef3c7;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+@media (min-width: 768px) {
+  .responsive-box {
+    background: #d1fae5;
+    padding: 2rem;
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .responsive-box {
+    background: #dbeafe;
+    padding: 3rem;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+/*min-width applies styles when the viewport width is greater than or equal to the specified value.
+max-width applies styles when the viewport width is less than or equal to the specified value.*/
+
+/*This uses a mobile-first approach, where the default styles are for smaller screens, and media queries are used to apply styles for larger screens. */
+
+.resp-nav {
+  background: #1e1b4b;
+  padding: 1rem;
+}
+.resp-logo {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.resp-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.resp-links a {
+  color: #a5b4fc;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .resp-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .resp-logo {
+    margin-bottom: 0;
+  }
+  .resp-links {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*
+max-width: 100% enusures the image never becomes wider than its container,preventing it from overflowing on smaller screens.
+height: auto maintains the image's aspect ratio as its width changes, preventing the image from becoming distorted.*/
+
+

@@ -1,0 +1,60 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /*grid-template-columns: 200px 200px 200px;*/
+    /*creates 3 columns of fixed width 200px each*/
+    /*grid-template-columns: 1fr 2fr 1fr;*/
+    /*creates 3 columns where the middle column is twice as wide as the others*/
+    /*grid-template-columns: repeat(3,1fr);*/
+    /*shorthand for creating 3 equal columns*/
+    gap: 1rem;
+    padding: 1rem;
+}
+.grid-item {
+    background: #4f46e5;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+/*fr represents a fraction of the available space in the grid container. 
+% uses a percentage of the container's total width, while fr shares the available space between grid columns.
+*/
+
+.grid-container-featured {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+.featured {
+    grid-column: 1 / 3;/* item starts at the first column and ends at the third column */
+    /*grid-column: 1 / -1; Makes the featured item span from the first column to the last column.
+    -1 represents the last grid line. so 1/-1 spans the entire row */
+    background: #4f46e5;
+    color: white;
+    padding: 2rem;
+    text-align: center;    
+}
+/*
+grid-column uses a start and end line to define the span of the item across the grid columns. 
+The first number indicates the starting column line, and the second number indicates the ending column line. */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+.photo-card {
+  background: #e0e7ff;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+/* repeat(auto-fill, minmax(200px, 1fr)) creates as many columns as will fit in the container, with each column having a minimum width of 200px and a maximum width of 1fr (fraction of available space). 
+This allows for a responsive grid that adjusts the number of columns based on the container's width. 
+*/
+
