@@ -4,10 +4,20 @@ const server = http.createServer((req, res) => {
   console.log(`${req.method} ${req.url}`)
 
   if (req.url === '/') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end('Home page')
+  res.writeHead(200, { 'Content-Type': 'text/html' })
+  res.end(`
+    <html>
+      <head>
+        <title>Home Page</title>
+      </head>
+      <body>
+        <h1>Welcome</h1>
+        <p>This home page is updated as a html page. </p>
+      </body>
+    </html>
+  `)
 
-  } else if (req.url === '/about') {
+}else if (req.url === '/about') {
     res.writeHead(200, { 'Content-Type': 'text/plain' })
     res.end('About page')
 
@@ -27,4 +37,12 @@ server.listen(3001, () => {
 /*
 process.uptime() returns the number of seconds the current Node.js process has been running.
 Content-Type:application/json tells the browser that the response is in json format.
+*/
+
+/*
+content-type tells the browser, the type of content sent to it.
+text/plain : it displays plain text.
+text/html : it renders HTML and displays the page.
+
+application/json: it tells that the json data is present and can be parsed by the applications.
 */
