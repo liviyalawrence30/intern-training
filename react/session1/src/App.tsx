@@ -1,4 +1,7 @@
 import Greeting from './Greeting'
+import TsxRules from './TsxRules'
+import StyledCard from './StyledCard'
+
 // React component is a reusable function. It returns the UI which is displayed on the web page.
 function App() {
   return (
@@ -7,6 +10,8 @@ function App() {
       <Greeting />
       <Greeting />
       <Greeting />
+      <TsxRules/>
+      <StyledCard />
     </div>
   )
 }
