@@ -3,11 +3,14 @@ import TsxRules from './TsxRules'
 import StyledCard from './StyledCard'
 import Profile from "./Profile"
 import SkillList from './SkillList'
+import ScoreCard from './ScoreCard'
+import StatusBadge from './StatusBadge'
+
 
 // React component is a reusable function. It returns the UI which is displayed on the web page.
 function App() {
   return (
-    <div>
+    <>
       <h1>Hello React</h1>
       <Greeting />
       <Greeting />
@@ -16,7 +19,10 @@ function App() {
       <StyledCard />
       <Profile/>
       <SkillList/>
-    </div>
+      <ScoreCard/>
+      <StatusBadge/>
+      
+    </>
   )
 }
 //'div' can be used only  when I need a container or I need to apply the styles for them .
