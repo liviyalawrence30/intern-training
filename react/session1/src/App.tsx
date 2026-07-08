@@ -5,6 +5,8 @@ import Profile from "./Profile"
 import SkillList from './SkillList'
 import ScoreCard from './ScoreCard'
 import StatusBadge from './StatusBadge'
+import InternCard from './InternCard'
+
 
 
 // React component is a reusable function. It returns the UI which is displayed on the web page.
@@ -21,6 +23,7 @@ function App() {
       <SkillList/>
       <ScoreCard/>
       <StatusBadge/>
+      <InternCard/>
       
     </>
   )
