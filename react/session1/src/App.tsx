@@ -6,6 +6,7 @@ import SkillList from './SkillList'
 import ScoreCard from './ScoreCard'
 import StatusBadge from './StatusBadge'
 import InternCard from './InternCard'
+import Dashboard from './Dashboard'
 
 
 
@@ -24,12 +25,13 @@ function App() {
       <ScoreCard/>
       <StatusBadge/>
       <InternCard/>
+      <Dashboard/>
       
     </>
   )
 }
 //'div' can be used only  when I need a container or I need to apply the styles for them .
-//Otherwise, I can use 'fragment' which helps to reuse the code and  avoid extra html tags .
+//Otherwise, I can use 'fragment' to avoid extra html tags .
 //I prefer fragment over div when I don't need a container.
 
 export default App
