@@ -1,3 +1,4 @@
+import './App.css'
 import Greeting from './Greeting'
 import TsxRules from './TsxRules'
 import StyledCard from './StyledCard'
