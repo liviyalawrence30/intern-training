@@ -27,5 +27,5 @@ export default ScoreCard
 
 /*
 Ternary operator can be used for simple true/false conditions inside TSX.
-'if' statement can be used for multiple statements or complex conditions.
+'if'  can be used for multiple statements or complex conditions.
 */

@@ -29,7 +29,7 @@ export default Profile
 
 /*{} in TSX is used for expressions that return a value.
 if and for are not expressions. They are statements.They cannot be used directly inside TSX.
-ternary operator and && can be used .*/
+Ternary operator and && can be used .*/
 
 
 

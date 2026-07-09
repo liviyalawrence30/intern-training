@@ -17,6 +17,6 @@ function SkillList() {
 export default SkillList
 
 /*
-If the 'key' prop is removed, the warning says "'index' is declared but its value is never read".
+If the 'key' prop is removed, the warning says "index is declared but its value is never read".
 Keys help react identify and update list items correctly.
 */

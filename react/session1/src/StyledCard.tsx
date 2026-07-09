@@ -14,4 +14,4 @@ function StyledCard() {
 
 export default StyledCard
 
-// Inline styles use a JavaScript object and camelCase because TSX uses JavaScript, not CSS strings.
+//Inline styles use a JavaScript object and camelCase because TSX uses JavaScript, not CSS strings.

@@ -24,5 +24,5 @@ function InternCard() {
 export default InternCard
 
 /*
-ternary can be used when we have if and else conditions. (2 possible outputs)
+ternary can be used when we have if and else conditions(2 possible outputs).
 && can be used when we have only if condition.*/
