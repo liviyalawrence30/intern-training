@@ -1,6 +1,8 @@
+import './App.css'
 import InternCard from './InternCard'
 import ProfileCard from './ProfileCard'
 import InternProfile,{type  Intern } from './InternProfile'
+import Card from './Card'
 
 function App() {
   const rahul: Intern = {
@@ -58,6 +60,26 @@ const priya: Intern = {
 It is useful when creating a new object or changing some values.
 If no changes are needed, using the original object is clearer.
 */}
+<Card title="Rahul">
+  <p>Score: 92</p>
+  <p>Status: Present</p>
+  <button>View Profile</button>
+</Card>
+
+<Card title="Announcements">
+  <ul>
+    <li>Session 3 tomorrow at 10am</li>
+    <li>Submit PRs by EOD</li>
+  </ul>
+</Card>
+
+<Card title="Empty Card" />
+
+
+
+
+
+
   </div>
   )
 }
