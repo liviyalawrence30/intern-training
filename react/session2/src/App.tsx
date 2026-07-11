@@ -1,7 +1,17 @@
 import InternCard from './InternCard'
 import ProfileCard from './ProfileCard'
+import InternProfile,{type  Intern } from './InternProfile'
 
 function App() {
+  const rahul: Intern = {
+  id: 1, name: 'Rahul', score: 92, isPresent: true,
+  skills: ['HTML', 'CSS', 'TypeScript', 'React'],
+}
+const priya: Intern = {
+  id: 2, name: 'Priya', score: 78, isPresent: true,
+  skills: ['Node.js', 'TypeScript'],
+}
+
   return (
     <div>
       <InternCard name="Rahul" score={92} isPresent={true}  />
@@ -40,17 +50,15 @@ function App() {
 <ProfileCard name="Priya" />
 <ProfileCard />
 
-
-
-
-      
-
-
-
-      
-
-      
-    </div>
+<InternProfile intern={rahul} />
+<InternProfile intern={priya} />
+<InternProfile intern={{ ...priya }} />
+{/*
+{...priya} creates a copy of the priya object.
+It is useful when creating a new object or changing some values.
+If no changes are needed, using the original object is clearer.
+*/}
+  </div>
   )
 }
 
