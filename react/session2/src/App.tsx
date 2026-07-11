@@ -1,4 +1,5 @@
 import InternCard from './InternCard'
+import ProfileCard from './ProfileCard'
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
 
       {/*<InternCard name="Amit"  score={45} />
       error: Property 'isPresent' is missing in type '{ name: string; score: number; }' but required in type 'InternCardProps'.
-      TypeScript prevents passing unsupported props, helping keep components consistent and avoiding coding mistakes. */}
+      TypeScript prevents passing unsupported props, helping  keep components consistent and avoiding coding mistakes. */}
       <InternCard name="Amit"  score={45} isPresent={false} />
 
 
@@ -29,6 +30,20 @@ function App() {
       error: Property 'age' does not exist on type 'IntrinsicAttributes & InternCardProps'.
       TypeScript prevents passing unsupported props, helping keep components consistent and avoiding coding mistakes.*/}
       <InternCard name="Rahul" score={92} isPresent={true}  />
+
+      <ProfileCard
+  name="Rahul"
+  role="Frontend"
+  score={92}
+  skills={['HTML', 'CSS', 'TypeScript', 'React']}/>  {/* updated with skills prop */}
+ 
+<ProfileCard name="Priya" />
+<ProfileCard />
+
+
+
+
+      
 
 
 
