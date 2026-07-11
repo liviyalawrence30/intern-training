@@ -4,6 +4,7 @@ import ProfileCard from './ProfileCard'
 import InternProfile,{type  Intern } from './InternProfile'
 import Card from './Card'
 import Dashboard from './Dashboard'
+import SelfLearning from './SelfLearning'
 
 function App() {
   const rahul: Intern = {
@@ -76,6 +77,7 @@ If no changes are needed, using the original object is clearer.
 
 <Card title="Empty Card" />
 <Dashboard />
+<SelfLearning />
 
 
 
