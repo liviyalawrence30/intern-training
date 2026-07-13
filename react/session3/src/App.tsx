@@ -1,7 +1,10 @@
 import './App.css'
 import Counter from './Counter'
 import InternForm from './InternForm'
+import InternList from './InternList'
+import InternObjectForm from './InternObjectForm'
 import StateTypes from './StateTypes'
+import TogglePanel from './TogglePanel'
 
 function App() {
   return (
@@ -9,6 +12,9 @@ function App() {
      <Counter />
      <StateTypes />
      <InternForm />
+     <TogglePanel />
+     <InternObjectForm />
+     <InternList/>
 
      </>
   )
