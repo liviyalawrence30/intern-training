@@ -1,5 +1,6 @@
 import './App.css'
 import Counter from './Counter'
+import Dashboard from './Dashboard'
 import EscapeHandler from './EscapeHandler'
 import FilteredInterns from './FilteredInterns'
 import FocusInput from './FocusInput'
@@ -27,6 +28,8 @@ function App() {
      <FocusInput/>
      <RefVsState/>
      <StopwatchRef/>
+     <Dashboard/>
+     
 
      </>
   )
