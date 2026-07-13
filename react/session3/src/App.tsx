@@ -8,6 +8,7 @@ import InternForm from './InternForm'
 import InternList from './InternList'
 import InternLoader from './InternLoader'
 import InternObjectForm from './InternObjectForm'
+import LiveTimer from './LiveTimer'
 import RefVsState from './RefVsState'
 import StateTypes from './StateTypes'
 import StopwatchRef from './StopwatchRef'
@@ -29,6 +30,7 @@ function App() {
      <RefVsState/>
      <StopwatchRef/>
      <Dashboard/>
+     <LiveTimer/>
      
 
      </>

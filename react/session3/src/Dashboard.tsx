@@ -24,6 +24,7 @@ function Dashboard() {
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
+    //console.log("Dashboard useEffect")
     setTimeout(() => {
       setInterns(internData)
       setIsLoading(false)
