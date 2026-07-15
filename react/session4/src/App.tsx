@@ -1,8 +1,10 @@
 import './App.css'
 import AddInternForm from './components/AddInternForm'
 import CounterDemo from './components/CounterDemo'
+import InternListWithCallback from './components/InternListWithCallback'
 import InternSearch from './components/InternSearch'
 import Navbar     from './components/Navbar'
+import ScoreStats from './components/ScoreStats'
 // import PropDrillingDemo from './components/PropDrillingDemo'
 import ThemedCard from './components/ThemedCard'
 import { useInterns } from './contexts/intern-context'
@@ -34,8 +36,10 @@ function App() {
           />
         ))}
       </div>
+      <ScoreStats/>
       <InternSearch/>
       <CounterDemo/>
+      <InternListWithCallback/>
       
     </div>
   )
