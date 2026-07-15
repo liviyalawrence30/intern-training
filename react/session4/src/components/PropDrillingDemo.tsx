@@ -42,7 +42,7 @@ function PropDrillingDemo() {
 export default PropDrillingDemo
 /*    
 The InternCard and  InternList doesn't use the user data.
-Instead they pass them to the child components .
+Instead they pass them to the child components (prop drilling).
 If the user Interface is updated, we need to  pass the updated data. 
 This makes the code harder to maintain.
 */

@@ -4,6 +4,7 @@ import AddInternForm from './components/AddInternForm'
 import InternSearch from './components/InternSearch'
 import InternListWithCallback from './components/InternListWithCallback'
 
+
 /*Hooks: Access shared state from the context.
 It encapsulates reusable logic and provides access to the shared intern context.*/
 

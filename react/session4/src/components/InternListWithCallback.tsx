@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import {  useCallback } from 'react'
 import { useInterns } from '../contexts/intern-context'
 import { useTheme }   from '../contexts/theme-context'
 
@@ -8,6 +8,33 @@ interface InternRowProps {
   score:    number
   onRemove: (id: number) => void
 }
+// const InternRow = memo(function InternRow({
+//   id,
+//   name,
+//   score,
+//   onRemove,
+// }: InternRowProps) {
+//   const { theme } = useTheme()
+
+//   console.log(`InternRow rendered: ${name}`)
+
+//   return (
+//     <div
+//       style={{
+//         background: theme === 'light' ? '#fff' : '#2a2a2a',
+//         color: theme === 'light' ? '#000' : '#eee',
+//         padding: '8px',
+//         margin: '4px 0',
+//       }}
+//     >
+//       <span>{name} — {score}</span>
+
+//       <button onClick={() => onRemove(id)}>
+//         Remove
+//       </button>
+//     </div>
+//   )
+// })
 
 function InternRow({ id, name, score, onRemove }: InternRowProps) {
   const { theme } = useTheme()

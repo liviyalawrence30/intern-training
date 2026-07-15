@@ -8,7 +8,7 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType | null>(null)
-/* createContext is initialised with null beacuse it's value comes from the theme provider.
+/* createContext is initialized with null beacuse it's value comes from the theme provider.
 If it is used outside the provider,it gives the error rather than incorrectly using the default value. */
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -31,8 +31,8 @@ export function useTheme(): ThemeContextType {
   return context
 }
 
-/*explore section:
-using usetheme() outside the component.
+/*explore section:using usetheme() outside the component
+
 error: Invalid hook call .Hooks should not be called outside the function component.
 Using them in a normal function violates the rules of hooks.
 */ 
