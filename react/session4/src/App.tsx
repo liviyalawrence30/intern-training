@@ -1,47 +1,38 @@
-import './App.css'
-import AddInternForm from './components/AddInternForm'
-import CounterDemo from './components/CounterDemo'
-import InternListWithCallback from './components/InternListWithCallback'
-import InternSearch from './components/InternSearch'
-import Navbar     from './components/Navbar'
+import Navbar from './components/Navbar'
 import ScoreStats from './components/ScoreStats'
-// import PropDrillingDemo from './components/PropDrillingDemo'
-import ThemedCard from './components/ThemedCard'
+import AddInternForm from './components/AddInternForm'
+import InternSearch from './components/InternSearch'
+import InternListWithCallback from './components/InternListWithCallback'
+
+/*Hooks: Access shared state from the context.
+It encapsulates reusable logic and provides access to the shared intern context.*/
+
 import { useInterns } from './contexts/intern-context'
-/*explore section:
-import { useTheme } from './contexts/theme-context'
-function testTheme() {
-  const theme = useTheme()
-  console.log(theme)
-}
-testTheme()
-error: Invalid hook call .Hooks should not be called outside the function component.
-Using them in a normal function violates the rules of hooks.
-*/ 
+
+
 function App() {
-  const {interns} = useInterns()
+  
+  //Context: Provides the shared application state such as intern data and loading.
+
+  const { isLoading } = useInterns()
+  if (isLoading) {
+    return <h2>Loading...</h2>
+  }
   return (
     <div>
-      {/* <PropDrillingDemo/> */}
+
+      {/* Components: Build and render the application's UI.
+      It uses contexts and hooks. */}
+
       <Navbar />
-      <AddInternForm/>
-      
       <div style={{ padding: '16px' }}>
-        
-        {interns.map((intern) => (
-          <ThemedCard
-            key={intern.name}
-            name={intern.name}
-            score={intern.score}
-          />
-        ))}
+        <ScoreStats />
+        <AddInternForm />
+        <InternSearch />
+        <InternListWithCallback />
       </div>
-      <ScoreStats/>
-      <InternSearch/>
-      <CounterDemo/>
-      <InternListWithCallback/>
-      
     </div>
   )
 }
+
 export default App

@@ -30,3 +30,9 @@ export function useTheme(): ThemeContextType {
   if (!context) throw new Error('useTheme must be used inside ThemeProvider')
   return context
 }
+
+/*explore section:
+using usetheme() outside the component.
+error: Invalid hook call .Hooks should not be called outside the function component.
+Using them in a normal function violates the rules of hooks.
+*/ 
