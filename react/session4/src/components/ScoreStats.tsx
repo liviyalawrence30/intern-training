@@ -5,9 +5,7 @@ function ScoreStats() {
   const { interns } = useInterns()
 
 
-  console.log('Recalculating stats...')
-
-const scores = interns.map(i => i.score)
+ 
 /*
 const stats = {
   highest: scores.length > 0 ? Math.max(...scores) : 0,
@@ -24,17 +22,20 @@ const stats = {
 //when useMemo is not used, stats are recalculated on every render.
 //with useMemo, stats are recalculated only when the intern array changes.
  const stats = useMemo(() => {
-    console.log('Recalculating stats...')
-    const scores = interns.map(i => i.score)
-    return {
-      highest: scores.length > 0 ? Math.max(...scores) : 0,
-      lowest:  scores.length > 0 ? Math.min(...scores) : 0,
-      average: scores.length > 0
+  console.log('Recalculating stats...')
+
+  const scores = interns.map(i => i.score)
+
+  return {
+    highest: scores.length > 0 ? Math.max(...scores) : 0,
+    lowest: scores.length > 0 ? Math.min(...scores) : 0,
+    average:
+      scores.length > 0
         ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
         : 0,
-      passing: interns.filter(i => i.score >= 50).length,
-    }
-  }, [interns])
+    passing: interns.filter(i => i.score >= 50).length,
+  }
+}, [interns])
 
   return (
     <div style={{ padding: '12px', background: '#f9f9f9', marginBottom: '12px' }}>
