@@ -1,11 +1,14 @@
 import {  type ReactNode } from 'react'
 import { render, type RenderOptions } from '@testing-library/react'
 import { ThemeProvider } from '../contexts/theme-context'
+import { InternProvider } from '../contexts/intern-context'
 
 function AllProviders({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
-      {children}
+      <InternProvider>
+        {children}
+      </InternProvider>
     </ThemeProvider>
   )
 }
