@@ -1,37 +1,14 @@
 import { render, screen } from '../test/test-utils'
 import userEvent from '@testing-library/user-event'
 import AddInternForm from './AddInternForm'
-
-import { vi } from 'vitest'
-
+import { vi, describe, beforeEach, test } from 'vitest'
 import { waitFor } from '../test/test-utils'
 
-
-/* userEvent simulates real user actions.
- while Fire event triggers only a single event.
-So, userEvent provides more realistic and reliable tests.*/
-test('updates name when user types', async () => {
-  const user = userEvent.setup()
-
-  render(<AddInternForm />)
-
-  await user.type(screen.getByPlaceholderText('Name'), 'Rahul')
-
-  expect(screen.getByDisplayValue('Rahul')).toBeInTheDocument()
-})
-
-test('updates score when user types', async () => {
-  const user = userEvent.setup()
-
-  render(<AddInternForm />)
-
-  await user.clear(screen.getByPlaceholderText('Score'))
-  await user.type(screen.getByPlaceholderText('Score'), '92')
-
-  expect(screen.getByDisplayValue('92')).toBeInTheDocument()
-})
-
-
+/*
+Keep describe blocks to two levels at most.
+Deeper nesting makes test files harder to read and maintain, and produces long
+failure paths that make it more difficult to locate the actual failing test.
+*/
 const mockAddIntern = vi.fn()
 
 vi.mock('../contexts/intern-context', async () => {
@@ -50,8 +27,63 @@ vi.mock('../contexts/intern-context', async () => {
   }
 })
 
+describe('AddInternForm', () => {
+  let user: ReturnType<typeof userEvent.setup>
+
+  beforeEach(() => {
+    user = userEvent.setup()
+    mockAddIntern.mockClear()
+  })
+
+
+describe('initial state', () => {
+  test('name input is empty', () => {
+  render(<AddInternForm />)
+
+  expect(screen.getByPlaceholderText('Name')).toHaveValue('')
+})
+
+test('score input starts at 0', () => {
+  render(<AddInternForm />)
+
+  expect(screen.getByPlaceholderText('Score')).toHaveValue(0)
+})
+
+test('role defaults to Frontend', () => {
+  render(<AddInternForm />)
+
+  expect(screen.getByRole('combobox')).toHaveValue('Frontend')
+})
+
+})
+
+describe('user interactions', () => {
+
+/* userEvent simulates real user actions.
+ while Fire event triggers only a single event.
+So, userEvent provides more realistic and reliable tests.*/
+test('updates name when user types', async () => {
+  
+
+  render(<AddInternForm />)
+
+  await user.type(screen.getByPlaceholderText('Name'), 'Rahul')
+
+  expect(screen.getByDisplayValue('Rahul')).toBeInTheDocument()
+})
+
+test('updates score when user types', async () => {
+  
+
+  render(<AddInternForm />)
+
+  await user.clear(screen.getByPlaceholderText('Score'))
+  await user.type(screen.getByPlaceholderText('Score'), '92')
+
+  expect(screen.getByDisplayValue('92')).toBeInTheDocument()
+})
 test('resets name input when Reset is clicked', async () => {
-  const user = userEvent.setup()
+ 
 
   render(<AddInternForm />)
 
@@ -60,11 +92,9 @@ test('resets name input when Reset is clicked', async () => {
 
   expect(screen.getByPlaceholderText('Name')).toHaveValue('')
 })
+
 test('calls addIntern with intern data when form is submitted', async () => {
-  const user = userEvent.setup()
-
-  mockAddIntern.mockClear()
-
+  
   render(<AddInternForm />)
 
   await user.type(screen.getByPlaceholderText('Name'), 'Rahul')
@@ -83,12 +113,15 @@ test('calls addIntern with intern data when form is submitted', async () => {
     })
   )
 })
-
 /* expect.objectContaining() contains only the specified properties of an object . 
 It ignores the additional properties, making the test more flexible than comparing the entire object exactly.*/
 
+})
+
+describe('validation', () => {
+
 test('shows error when name is empty on submit', async () => {
-  const user = userEvent.setup()
+ 
 
   render(<AddInternForm />)
 
@@ -98,8 +131,7 @@ test('shows error when name is empty on submit', async () => {
 })
 
 test('shows error when score is above 100', async () => {
-  const user = userEvent.setup()
-
+  
   render(<AddInternForm />)
 
   await user.type(screen.getByPlaceholderText('Name'), 'Rahul')
@@ -115,9 +147,9 @@ test('shows error when score is above 100', async () => {
 })
 
 test('does not call addIntern when form is invalid', async () => {
-  const user = userEvent.setup()
+  
 
-  mockAddIntern.mockClear()
+
 
   render(<AddInternForm />)
 
@@ -134,23 +166,23 @@ It better expresses the intentions of the test.
 
 
 test('error clears when valid name is entered after failed submit', async () => {
-  const user = userEvent.setup()
+  
 
   render(<AddInternForm />)
 
-  // Trigger validation error
   await user.click(screen.getByRole('button', { name: 'Add Intern' }))
   expect(screen.getByText('Name is required')).toBeInTheDocument()
 
-  // Fix the name
   await user.type(screen.getByPlaceholderText('Name'), 'Rahul')
 
-  // Submit again so validation runs again
   await user.click(screen.getByRole('button', { name: 'Add Intern' }))
 
-  // Now the old error should be gone
   await waitFor(() => {
     expect(screen.queryByText('Name is required')).not.toBeInTheDocument()
   })
 })
+})
+
+})
+
 
