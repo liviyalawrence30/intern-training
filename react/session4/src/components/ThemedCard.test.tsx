@@ -75,4 +75,23 @@ test('renders a different name and score without mixing up values', () => {
 
 
 
+/*
+vi.fn() creates a mock function that records how it is called during a test.
+vi.mock() replaces an entire module or dependency with a mocked implementation.
+vi.spyOn() observes or temporarily overrides an existing function while allowing it to be restored later.
+*/
+test('no console errors during ThemedCard render', () => {
+  const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+  render(<ThemedCard name="Rahul" score={92} />)
+
+  expect(spy).not.toHaveBeenCalled()
+
+  spy.mockRestore()
+})
+
+
+
+
+
 
