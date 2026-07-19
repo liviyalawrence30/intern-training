@@ -1,5 +1,8 @@
 import { render, screen } from '../test/test-utils'
 import ThemedCard from './ThemedCard'
+import { vi } from 'vitest'
+import * as ThemeContext from '../contexts/theme-context'
+
 
 /* we import render and screen from ../test/test-utils instead of @testing-library/react because test-utils wraps the component with ThemeProvider. 
 So,the component receives the required theme context while running tests.
@@ -80,6 +83,14 @@ vi.fn() creates a mock function that records how it is called during a test.
 vi.mock() replaces an entire module or dependency with a mocked implementation.
 vi.spyOn() observes or temporarily overrides an existing function while allowing it to be restored later.
 */
+
+/*
+This test can be improved because if it fails before spy.mockRestore(),
+the mocked console.error may affect later tests.
+This partially violates the Independent principle of FIRST.
+Using try/finally ensures the original function is always restored, making the test more independent.
+
+*/
 test('no console errors during ThemedCard render', () => {
   const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
@@ -90,6 +101,26 @@ test('no console errors during ThemedCard render', () => {
   spy.mockRestore()
 })
 
+//testing the untested branch
+
+test('renders correctly in dark theme', () => {
+  vi.spyOn(ThemeContext, 'useTheme').mockReturnValue({
+    theme: 'dark',
+    toggleTheme: vi.fn(),
+  })
+
+  render(<ThemedCard name="Rahul" score={92} />)
+
+  const card = screen.getByText('Rahul').parentElement!
+
+  expect(card).toHaveStyle({
+    background: '#2a2a2a',
+    color: '#eee',
+    border: '1px solid #444',
+  })
+
+  vi.restoreAllMocks()
+})
 
 
 

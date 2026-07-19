@@ -28,3 +28,6 @@ test('multiple elements appear after data loads', async () => {
 /* waitFor() is used when waiting for multiple assertions or more complex conditions to become true.
 findBy() is used when waiting for a single element to appear. */
 
+
+
+
