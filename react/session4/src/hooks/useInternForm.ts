@@ -26,16 +26,25 @@ function useInternForm(): UseInternFormReturn {
   const [error, setError] = useState<string>('')
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void {
-    const { name, value, type } = e.target
-    setForm(prev => ({
-      ...prev,
-      [name]: type === 'checkbox'
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+): void {
+  const { name, value, type } = e.target;
+
+  setForm(prev => ({
+    ...prev,
+    [name]:
+      type === 'checkbox'
         ? (e.target as HTMLInputElement).checked
-        : name === 'score' ? Number(value) : value,
-    }))
+        : name === 'score'
+        ? Number(value)
+        : value,
+  }));
+
+  // Clear the validation error once the user starts typing a name
+  if (name === 'name' && value.trim()) {
+    setError('');
   }
+}
 
   function handleReset(): void {
     setForm(initialForm)

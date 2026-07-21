@@ -130,5 +130,149 @@ test('correct number of Remove buttons matches the intern count', async ({ page 
   ).toHaveCount(4);/* when the toHaveCount(5) is set ,it takes few seconds to fail.  error:Expected: 5 Received: 4  */
 });
 
+test.describe('Add Intern Journey', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+
+// This test checks the complete user flow.
+// It makes sure a new intern is added and shown in the list.
+  test('adds a new intern and shows them in the list', async ({ page }) => {
+    // Fill in the form
+    await page.getByPlaceholder('Name').fill('Vikram');
+    await page.getByPlaceholder('Score').clear();
+    await page.getByPlaceholder('Score').fill('88');
+
+    // Submit the form
+    await page.getByRole('button', { name: 'Add Intern' }).click();
+
+    // Check that the new intern appears
+   await expect(page.getByText('Vikram').first()).toBeVisible();
+await expect(page.getByText('Vikram — 88')).toBeVisible();
+  });
+
+  test('intern count increases after adding', async ({ page }) => {
+    // Check the initial number of interns
+    await expect(
+      page.getByRole('button', { name: 'Remove' })
+    ).toHaveCount(4);
+
+    await page.getByPlaceholder('Name').fill('Vikram');
+    await page.getByRole('button', { name: 'Add Intern' }).click();
+
+    // Check that one more intern is added
+    await expect(
+      page.getByRole('button', { name: 'Remove' })
+    ).toHaveCount(5);
+  });
+
+  test('form clears after successful submission', async ({ page }) => {
+    await page.getByPlaceholder('Name').fill('Vikram');
+    await page.getByPlaceholder('Score').fill('88');
+    await page.getByRole('button', { name: 'Add Intern' }).click();
+
+    // Check that the form is cleared
+    await expect(page.getByPlaceholder('Name')).toHaveValue('');
+  });
+
+//not.toBeVisible() checks that the error is no longer shown. It waits automatically until the error disappears.
+//Unlike the Vitest queryByText pattern, we don't need to manually check whether the element exists.
+test('shows validation error when name is empty', async ({ page }) => {
+  // Click submit without entering a name
+  await page.getByRole('button', { name: 'Add Intern' }).click();
+
+  await expect(page.getByText('Name is required')).toBeVisible();
 });
+
+test('does not add intern when form is invalid', async ({ page }) => {
+  await page.getByRole('button', { name: 'Add Intern' }).click();
+
+  // The intern count should stay the same
+  await expect(
+    page.getByRole('button', { name: 'Remove' })
+  ).toHaveCount(4);
+});
+
+test('validation error disappears after name is entered', async ({ page }) => {
+  await page.getByRole('button', { name: 'Add Intern' }).click();
+  await expect(page.getByText('Name is required')).toBeVisible();
+
+  await page.getByPlaceholder('Name').fill('Vikram');
+
+  await expect(page.getByText('Name is required')).not.toBeVisible();
+});
+  });
+
+
+
+  test.describe('Remove Intern Journey', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('removes an intern when Remove is clicked', async ({ page }) => {
+  await expect(page.getByText('Rahul').first()).toBeVisible();
+
+  await page.getByRole('button', { name: 'Remove' }).first().click();
+
+  await expect(page.getByText('Rahul')).not.toBeVisible();
+});
+
+  test('intern count decreases after removal', async ({ page }) => {
+    await expect(
+      page.getByRole('button', { name: 'Remove' })
+    ).toHaveCount(4);
+
+    await page.getByRole('button', { name: 'Remove' }).first().click();
+
+    await expect(
+      page.getByRole('button', { name: 'Remove' })
+    ).toHaveCount(3);
+  });
+//filter() searches for the card that contains "Rahul".
+//This avoids using parent traversal and helps target the correct Remove button more clearly.
+
+});
+
+
+
+/*Playwright tests the complete user interaction in the browser.
+Unlike the Navbar Vitest unit test, it verifies that clicking the button changes the UI 
+and updates the button label correctly.*/
+
+test.describe('Theme Toggle Journey', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('toggle button label changes from Dark to Light after click', async ({ page }) => {
+    await expect(
+      page.getByRole('button', { name: /switch to dark mode/i })
+    ).toBeVisible();
+
+    await page.getByRole('button', { name: /switch to dark mode/i }).click();
+
+    await expect(
+      page.getByRole('button', { name: /switch to light mode/i })
+    ).toBeVisible();
+  });
+
+  test('toggle switches back on second click', async ({ page }) => {
+    await page.getByRole('button', { name: /switch to dark mode/i }).click();
+    await page.getByRole('button', { name: /switch to light mode/i }).click();
+
+    await expect(
+      page.getByRole('button', { name: /switch to dark mode/i })
+    ).toBeVisible();
+  });
+
+});
+
+
+});
+
 
