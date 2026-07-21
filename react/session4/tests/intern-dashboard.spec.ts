@@ -90,3 +90,45 @@ test('asserts that an absent element is not visible', async ({ page }) => {
   await expect(page.getByText('Placeholder')).not.toBeVisible();
 });
 });
+
+//toHaveText() checks the full text.
+//toContainText() checks if part of the text is present.
+
+test.describe('Assertions', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('heading has the correct text', async ({ page }) => {
+    await expect(
+      page.getByRole('heading', { name: 'Intern Dashboard' })
+    ).toHaveText('Intern Dashboard');
+  });
+
+  test('theme toggle button contains the word "Dark"', async ({ page }) => {
+    await expect(
+      page.getByRole('button', { name: /switch to dark mode/i })
+    ).toContainText('Dark');
+  });
+
+  test('error message is not visible initially', async ({ page }) => {
+    await expect(page.getByText('Name is required')).not.toBeVisible();
+  });
+
+  test('name input is empty initially', async ({ page }) => {
+  await expect(page.getByPlaceholder('Name')).toHaveValue('');
+});
+
+test('score input is 0 initially', async ({ page }) => {
+  await expect(page.getByPlaceholder('Score')).toHaveValue('0');
+});
+
+test('correct number of Remove buttons matches the intern count', async ({ page }) => {
+  await expect(
+    page.getByRole('button', { name: 'Remove' })
+  ).toHaveCount(4);/* when the toHaveCount(5) is set ,it takes few seconds to fail.  error:Expected: 5 Received: 4  */
+});
+
+});
+
