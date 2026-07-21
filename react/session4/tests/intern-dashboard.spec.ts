@@ -276,3 +276,9 @@ test.describe('Theme Toggle Journey', () => {
 });
 
 
+/*UI mode shows each steps highlighted to the matched element.
+This is easier to understand than the terminal*/
+
+
+/*Headless mode runs tests without opening a browser, making it faster for regular development and CI. 
+Headed mode opens the browser window, making it useful for debugging and watching the test execute step by step.*/
