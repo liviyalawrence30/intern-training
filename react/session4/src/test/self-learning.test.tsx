@@ -6,57 +6,40 @@ import InternListWithCallback from '../components/InternListWithCallback'
 import AddInternForm from '../components/AddInternForm'
 import userEvent from '@testing-library/user-event'
 
-
-/*vi.useFakeTimers() replaces real timers with fake ones for testing .
-This lets tests manually run setTimeout() and setInterval() instantly using methods like vi.runAllTimers().*/
+/*
+vi.useFakeTimers() replaces real timers with fake ones for testing.
+This lets tests manually run setTimeout() and setInterval() instantly.
+*/
 test('uses fake timers to skip the loading delay', () => {
   vi.useFakeTimers()
 
-  render(<ScoreStats />)
+  try {
+    render(<ScoreStats />)
 
-  expect(screen.getByText('Loading interns...')).toBeInTheDocument()
+    expect(screen.getByText('Loading interns...')).toBeInTheDocument()
 
-  act(() => {
-    vi.runAllTimers()
-  })
+    act(() => {
+      vi.runAllTimers()
+    })
 
-  expect(screen.queryByText('Loading interns...')).not.toBeInTheDocument()
-  expect(screen.getByText('Rahul')).toBeInTheDocument()
-  expect(screen.getByText('Priya')).toBeInTheDocument()
-
-  vi.useRealTimers()
-})
-
-vi.mock('../contexts/intern-context', async () => {
-  const actual = await vi.importActual<
-    typeof import('../contexts/intern-context')
-  >('../contexts/intern-context')
-
-  return {
-    ...actual,
-    useInterns: () => ({
-      interns: [
-        { id: 1, name: 'Rahul', score: 92 },
-        { id: 2, name: 'Priya', score: 85 },
-        { id: 3, name: 'Rahul', score: 65 },
-      ],
-      isLoading: false,
-      addIntern: vi.fn(),
-      removeIntern: vi.fn(),
-    }),
+    expect(screen.queryByText('Loading interns...')).not.toBeInTheDocument()
+    expect(screen.getByText('Rahul')).toBeInTheDocument()
+    expect(screen.getByText('Priya')).toBeInTheDocument()
+  } finally {
+    vi.useRealTimers()
   }
 })
 
-//within() scopes the queries to a specific element when the same text appears in multiple rows.
-test('uses within to check the score inside a specific intern row', () => {
+// within() scopes the queries to a specific element when the same text appears in multiple rows.
+test('uses within to check the score inside a specific intern row', async () => {
   render(<InternListWithCallback />)
-  const rahulRows = screen.getAllByText(/Rahul/)
-  const firstRow = rahulRows[0].closest('li') ?? rahulRows[0].parentElement!
+
+  const rahulRows = await screen.findAllByText(/Rahul/)
+  const firstRow =
+    rahulRows[0].closest('li') ?? rahulRows[0].parentElement!
 
   expect(within(firstRow).getByText(/92/)).toBeInTheDocument()
 })
-
-
 
 test('moves focus through the form using the Tab key', async () => {
   const user = userEvent.setup()
@@ -86,9 +69,9 @@ test('moves focus through the form using the Tab key', async () => {
   ).toHaveFocus()
 })
 
-//Coverage report
+// Coverage report
 
-// My useInternForm.ts file has 100% line coverage .
+// My useInternForm.ts file has 100% line coverage.
 
-//Line coverage measures how many lines were executed.
-//Branch coverage checks whether every decision path was tested.
+// Line coverage measures how many lines were executed.
+// Branch coverage checks whether every decision path was tested.
