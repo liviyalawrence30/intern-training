@@ -38,12 +38,14 @@ function AddInternForm() {
       />
 
       <input
-        name="isPresent"
-        type="checkbox"
-        checked={form.isPresent}
-        onChange={handleChange}
-      />
-      <label>Present</label>
+  id="present"
+  name="isPresent"
+  type="checkbox"
+  checked={form.isPresent}
+  onChange={handleChange}
+/>
+
+<label htmlFor="present">Present</label>
 
       <select
         name="role"
