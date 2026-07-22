@@ -77,6 +77,71 @@ It can become unreliable if items are added,removed or reordered because the sam
 It is safer to locate elements using unique text or other stable attributes whenever possible.
  */
 
+test.describe('Scoped Locators', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test("asserts score and Remove button inside Rahul's card only", async ({ page }) => {
+    const rahulCard = page
+      .getByText('Rahul — 92')
+      .locator('..');
+
+    await expect(
+      rahulCard.getByText('Rahul — 92')
+    ).toBeVisible();
+
+    await expect(
+      rahulCard.getByRole('button', { name: 'Remove' })
+    ).toBeVisible();
+  });
+
+  test('asserts different data in two different cards', async ({ page }) => {
+    const rahulCard = page
+      .getByText('Rahul — 92')
+      .locator('..');
+
+    const amitCard = page
+      .getByText('Amit — 45')
+      .locator('..');
+
+    await expect(
+      rahulCard.getByText('Rahul — 92')
+    ).toBeVisible();
+
+    await expect(
+      amitCard.getByText('Amit — 45')
+    ).toBeVisible();
+  });
+
 });
+/*
+Scoped locators search only inside a specific intern card instead of the entire page.
+This avoids matching Remove buttons or scores from other intern cards 
+and makes the test more accurate and reliable.
+ */
+
+test('fills the form using scoped locators on the form container', async ({ page }) => {
+  const form = page.getByRole('form', { name: 'Add Intern' });
+
+  await form.getByPlaceholder('Name').fill('Vikram');
+  await form.getByPlaceholder('Score').fill('75');
+  await form.getByRole('button', { name: 'Add Intern' }).click();
+
+  await expect(page.getByText('Vikram — 75')).toBeVisible();
+});
+/*
+Scoping locators limits the search to a specific form or section, making tests more reliable .
+Scenarios:
+1.If multiple forms contain a "Name" input,scoping ensures the correct input field is filled instead of another one.
+2.If different sections have an "Add" or "Submit" button, scoping ensures the test clicks the button in the intended form ,preventing a false-positive test pass.
+
+*/
+
+});
+
+
+
 
 
