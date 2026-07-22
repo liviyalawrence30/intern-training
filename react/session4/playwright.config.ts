@@ -30,6 +30,8 @@ a desktop viewport size, user agent, and device pixel ratio
 to simulate the Chrome browser on a desktop.*/
 projects: [
   { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+  { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
+  { name: 'webkit',   use: { ...devices['Desktop Safari'] } },
 ],
 
   // Starts the development server before running the tests.
