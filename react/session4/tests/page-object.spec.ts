@@ -66,3 +66,22 @@ test.describe('Journeys via Page Object', () => {
 //or() combines 2 locators and matches either one.
 //It is useful when the same element can be identified in different ways.
 
+
+test('chromium-only feature check', async ({ page, browserName }) => {
+  // Skip this test on Firefox and WebKit
+  test.skip(
+    browserName !== 'chromium',
+    'This test targets Chromium-specific behaviour only'
+  );
+
+  await page.goto('/');
+  await expect(
+    page.getByRole('heading', { name: 'Intern Dashboard' })
+  ).toBeVisible();
+});
+
+
+/* test.skip(browserName !== 'chromium', ...) can be used when,
+testing experimental CSS features such as CSS view templates 
+because support is not consistent across chromium, firefox and webkit.
+*/

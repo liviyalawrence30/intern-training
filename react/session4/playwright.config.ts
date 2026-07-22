@@ -32,6 +32,12 @@ projects: [
   { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
   { name: 'firefox',  use: { ...devices['Desktop Firefox'] } },
   { name: 'webkit',   use: { ...devices['Desktop Safari'] } },
+
+
+  { name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
+  { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
+
+   
 ],
 
   // Starts the development server before running the tests.
@@ -45,3 +51,13 @@ projects: [
 /*Examples of mobile device presets available in Playwright:
 devices['iPhone 14']
  devices['Pixel 7']*/
+
+ /*
+timeout limits how long the entire test can run.
+expect.timeout limits how long an assertion waits for the expected condition before failing.
+ */
+
+/*
+The pixel 5 device preset configures a mobile viewport, a mobile user agent 
+and touch support to simulate a real mobile device.
+*/

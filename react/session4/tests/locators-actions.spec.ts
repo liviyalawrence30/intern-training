@@ -230,6 +230,7 @@ test('Enter inside name input submits the form', async ({ page }) => {
   await page.getByPlaceholder('Name').press('Enter');
 
   await expect(page.getByText('Vikram — 85')).toBeVisible();
+  
 });
 
 
@@ -260,5 +261,13 @@ test('type() fires individual key events', async ({ page }) => {
 
 
 
+/*
+page.pause() helps inspect the page and find correct locators.
+It is useful for debugging UI state and element selection.
+*/
 
+/*
+It is harder to read the terminal error.
+The inspector highlights the locator and loads the browser, making it easier to read.
+*/
 
