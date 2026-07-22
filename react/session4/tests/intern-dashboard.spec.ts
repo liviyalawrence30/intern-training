@@ -12,6 +12,10 @@ and avoids repeating page.goto('/')in individual test cases.*/
     await expect(
       page.getByRole('heading', { name: 'Intern Dashboard' })
     ).toBeVisible();
+
+    /* When I gave the name as "wrong title", the UI clearly provided a screenshot of the intern dashboard name.
+    In the error context file, it clearly said the locator is expected to be visible and it showed the line in the source code pointing the error. */
+    
   });
 
   test('shows the initial intern names', async ({ page }) => {
@@ -282,3 +286,11 @@ This is easier to understand than the terminal*/
 
 /*Headless mode runs tests without opening a browser, making it faster for regular development and CI. 
 Headed mode opens the browser window, making it useful for debugging and watching the test execute step by step.*/
+
+
+/*
+Shows each step in order and helps to identify where the failure occured.
+Screenshots shows the page at each step to verify the UI during failure.
+Network displays HTTP requests and responses to help diagnose API .
+DOM snapshots shows the page structure at each step to inspect missing or incorrect elements.
+ */
