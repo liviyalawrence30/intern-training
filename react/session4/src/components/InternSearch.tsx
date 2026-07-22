@@ -28,13 +28,19 @@ function InternSearch() {
 
       <h3>Filtered Interns</h3>
 
-      {filtered.map((intern) => (
-        <div key={intern.id}>
-          <p>{intern.name}</p>
-          <p>{intern.role}</p>
-          <p>{intern.score}</p>
-        </div>
-      ))}
+<div data-testid="filtered-interns">
+  {filtered.length === 0 ? (
+    <p>No interns found</p>
+  ) : (
+    filtered.map((intern) => (
+      <div key={intern.id}>
+        <p>{intern.name}</p>
+        <p>{intern.role}</p>
+        <p>{intern.score}</p>
+      </div>
+    ))
+  )}
+</div>
     </div>
   )
 }

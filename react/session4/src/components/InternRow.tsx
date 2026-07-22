@@ -12,6 +12,7 @@ function InternRow({ id, name, score, onRemove }: InternRowProps) {
 
   return (
     <div
+      data-testid={`intern-${name}`}
       style={{
         background: theme === 'light' ? '#fff' : '#2a2a2a',
         color: theme === 'light' ? '#000' : '#eee',
