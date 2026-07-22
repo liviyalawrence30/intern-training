@@ -141,6 +141,123 @@ Scenarios:
 
 });
 
+test.describe('Actions', () => {
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('fill sets the input value directly', async ({ page }) => {
+    await page.getByPlaceholder('Name').fill('Vikram');
+
+    await expect(page.getByPlaceholder('Name')).toHaveValue('Vikram');
+  });
+
+  test('selectOption selects by visible label text', async ({ page }) => {
+    const role = page.locator('select');
+
+    await role.selectOption({ label: 'Backend' });
+
+    await expect(role).toHaveValue('Backend');
+  });
+
+  test('selectOption selects by value attribute', async ({ page }) => {
+    const role = page.locator('select');
+
+    await role.selectOption('Frontend');
+
+    await expect(role).toHaveValue('Frontend');
+  });
+
+/* 
+  selectOption('Backend') selects an option using its value attribute
+  selectOption({label :'Backend'}) selects it using the text displayed to the user.
+*/
+
+/*
+check() ensures the checkbox is checked.
+uncheck() ensures it is unchecked, regardless of its current state.
+Using click() simply toggles the checkbox. 
+If it is already checked,click() will uncheck it, which can make the test fail or produce unexpected results.
+*/
+  test('checkbox is checked by default', async ({ page }) => {
+  const presentCheckbox = page.locator('input[name="isPresent"]');
+
+  await expect(presentCheckbox).toBeChecked();
+});
+
+test('uncheck removes the checked state', async ({ page }) => {
+  const presentCheckbox = page.locator('input[name="isPresent"]');
+
+  await presentCheckbox.uncheck();
+
+  await expect(presentCheckbox).not.toBeChecked();
+});
+
+test('check re-applies the checked state', async ({ page }) => {
+  const presentCheckbox = page.locator('input[name="isPresent"]');
+
+  await presentCheckbox.uncheck();
+  await presentCheckbox.check();
+
+  await expect(presentCheckbox).toBeChecked();
+});
+
+/* 
+locator.press() sends a key to a specific element.
+page.keyboard.press() sends a key to whichever element is currently focused on the page.
+page.keyboard.press('Tab') is used to move focus between elements.
+*/
+
+
+test('Tab moves focus from name input to score input', async ({ page }) => {
+  const nameInput = page.getByPlaceholder('Name');
+  const scoreInput = page.getByPlaceholder('Score');
+
+  await nameInput.focus();
+  await expect(nameInput).toBeFocused();
+
+  await page.keyboard.press('Tab');
+
+  await expect(scoreInput).toBeFocused();
+});
+
+test('Enter inside name input submits the form', async ({ page }) => {
+  await page.getByPlaceholder('Name').fill('Vikram');
+  await page.getByPlaceholder('Score').fill('85');
+  await page.locator('select').selectOption('Backend');
+
+  await page.getByPlaceholder('Name').press('Enter');
+
+  await expect(page.getByText('Vikram — 85')).toBeVisible();
+});
+
+
+/* 
+type() is used when the app needs to respond to each key press.
+eg: search box for filtering etc.
+Fill() sets the entire value at once . It does not triger the same behaviour as those character-by -character actions.  */
+
+
+test('clear() empties the input', async ({ page }) => {
+  const scoreInput = page.getByPlaceholder('Score');
+
+  await scoreInput.fill('92');
+  await scoreInput.clear();
+
+  await expect(scoreInput).toHaveValue('0');
+});
+
+test('type() fires individual key events', async ({ page }) => {
+  await page.getByPlaceholder('Search').type('Rah');
+
+  await expect(
+    page.getByText('Rahul — 92')
+  ).toBeVisible();
+});
+
+});
+
 
 
 
