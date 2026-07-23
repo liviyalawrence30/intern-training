@@ -94,3 +94,6 @@ In the 2nd run, it compares the current page with the baseline .
 If they are identical, the test passes.
 */
 });
+
+
+

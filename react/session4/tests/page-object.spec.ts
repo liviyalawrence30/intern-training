@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { DashboardPage } from './pages/DashboardPage';
+import { test, expect } from './fixtures';
+
 
 /*
 dashboard.themeToggle is created once in the DashboardPage constructor using a locator that matches the theme toggle button.
@@ -8,21 +8,15 @@ So checking for "Light" confirms the theme has changed and the next available ac
 */
 
 test.describe('Journeys via Page Object', () => {
-  let dashboard: DashboardPage;
-
-  test.beforeEach(async ({ page }) => {
-    dashboard = new DashboardPage(page);
-    await dashboard.goto();
-  });
-
-  test('adds a new intern', async () => {
+  
+  test('adds a new intern', async ({dashboard}) => {
     await dashboard.addIntern('Vikram', '88', 'Backend');
 
     await expect(dashboard.internCard('Vikram')).toBeVisible();
     await expect(dashboard.internCount).toHaveCount(5);
   });
 
-  test('searches and filters the list', async () => {
+  test('searches and filters the list', async ({dashboard}) => {
     await dashboard.search('Rah');
 
     const filtered = dashboard.page.getByTestId('filtered-interns');
@@ -31,7 +25,7 @@ test.describe('Journeys via Page Object', () => {
     await expect(filtered.getByText('Priya')).toHaveCount(0);
   });
 
-  test('clears search and restores all interns', async () => {
+  test('clears search and restores all interns', async ({dashboard}) => {
     const filtered = dashboard.page.getByTestId('filtered-interns');
 
     await dashboard.search('Rahul');
@@ -43,19 +37,19 @@ test.describe('Journeys via Page Object', () => {
     await expect(filtered.getByText('Sneha')).toBeVisible();
   });
 
-  test('removes an intern by name', async () => {
+  test('removes an intern by name', async ({dashboard}) => {
     await dashboard.removeButtonFor('Rahul').click();
 
     await expect(dashboard.internCard('Rahul')).toBeHidden();
     await expect(dashboard.internCount).toHaveCount(3);
   });
 
-  test('toggles theme and button label updates', async () => {
+  test('toggles theme and button label updates', async ({dashboard}) => {
     await dashboard.toggleTheme();
 
     await expect(dashboard.themeToggle).toContainText('Light');
   });
-  test('shows validation error on empty submit', async () => {
+  test('shows validation error on empty submit', async ({dashboard}) => {
   await dashboard.addButton.click();
 
   await expect(dashboard.page.getByText('Name is required')).toBeVisible();

@@ -71,3 +71,113 @@ when test.only() is left in a code, it tests only that test and ignores all the 
 So,test.only() should be removed before committing.
 
 */
+
+
+test.describe('Self Learning', () => {
+  test('Soft assertions smoke test', async ({ page }) => {
+    await page.goto('/');
+
+    await expect.soft(
+      page.getByRole('heading', { name: 'Intern Dashboard' })
+    ).toBeVisible();
+
+    await expect.soft(
+      page.getByRole('button', { name: 'Add Intern' })
+    ).toBeVisible();
+
+    await expect.soft(
+      page.getByPlaceholder('Search Intern')
+    ).toBeVisible();
+
+    await expect.soft(
+      page.getByRole('button', { name: 'Remove' })
+    ).toHaveCount(4);
+    });
+
+    /*
+    Soft  assertions continue running even if one assertion fails.
+    It makes them useful for checking multiple UI elements in one test.
+    */
+
+  });
+
+  
+  
+/*
+  test('shows mocked intern data', async ({ page }) => {
+  await page.route('/api/interns', async route => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify([
+        {
+          id: 1,
+          name: 'Mock Intern',
+          score: 100,
+          role: 'QA',
+          isPresent: true,
+        },
+      ]),
+    });
+  });
+
+  await page.goto('/');
+
+  await expect(page.getByText('Mock Intern')).toBeVisible();
+});
+*/
+
+
+
+test('intern list visual comparison', async ({ page }) => {
+  await page.goto('/');
+
+  // Wait until the initial interns are loaded
+  await expect(
+    page.getByRole('button', { name: 'Remove' })
+  ).toHaveCount(4);
+
+  // Capture the baseline screenshot
+  await expect(
+    page.getByTestId('filtered-interns')
+  ).toHaveScreenshot('intern-list-before.png');
+
+  // Add a new intern
+  await page.getByPlaceholder('Name').fill('Vikram');
+  await page.getByPlaceholder('Score').fill('88');
+  await page.getByRole('combobox').selectOption('Backend');
+  await page.getByRole('button', { name: 'Add Intern' }).click();
+
+  // Verify the list changed
+  await expect(
+    page.getByTestId('filtered-interns')
+  ).not.toHaveScreenshot('intern-list-before.png');
+});
+
+
+test('reads CSS variable with page.evaluate()', async ({ page }) => {
+  await page.goto('/');
+
+  const before = await page.evaluate(() => {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue('--background-color')
+      .trim();
+  });
+
+  await page.getByRole('button', {
+    name: /switch to dark mode/i,
+  }).click();
+
+  const after = await page.evaluate(() => {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue('--background-color')
+      .trim();
+  });
+
+  expect(before).not.toBe(after);
+});
+
+/*
+page .evaluates() executes java script inside the browser context.
+It is useful for reading values such as CSS variables, localStorage, or other browser only APIs that are not directly accessible from Playwright.
+*/
