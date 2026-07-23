@@ -19,6 +19,11 @@ const navigate = useNavigate();
 const request = location.state?.websiteRequest;
 const isFromWebsiteRequest = !!request;
   const [slots, setSlots] = useState<Slot[]>([]);
+  const today = new Date().toISOString().split("T")[0];
+
+const filteredSlots = slots.filter(
+  (slot) => slot.is_available && slot.date >= today
+);
 
   const [formData, setFormData] = useState({
     name: request?.name ?? "",
@@ -38,11 +43,14 @@ const isFromWebsiteRequest = !!request;
     try {
       const response = await api.get("/slots/");
 
-      setSlots(
-        response.data.filter(
-          (slot: Slot) => slot.is_available
-        )
-      );
+      const today = new Date().toISOString().split("T")[0];
+
+setSlots(
+  response.data.filter(
+    (slot: Slot) =>
+      slot.is_available && slot.date >= today
+  )
+);
     } catch (error) {
       console.error(error);
     }
@@ -173,13 +181,13 @@ const isFromWebsiteRequest = !!request;
         >
           <option value="">Select Date</option>
 
-          {[...new Set(slots.map((slot) => slot.date))].map(
-            (date) => (
-              <option key={date} value={date}>
-                {date}
-              </option>
-            )
-          )}
+          {[...new Set(filteredSlots.map((slot) => slot.date))].map(
+  (date) => (
+    <option key={date} value={date}>
+      {date}
+    </option>
+  )
+)}
         </select>
       </div>
 
@@ -194,15 +202,15 @@ const isFromWebsiteRequest = !!request;
         >
           <option value="">Select Time</option>
 
-          {slots
-            .filter(
-              (slot) => slot.date === formData.date
-            )
-            .map((slot) => (
-              <option key={slot.id} value={slot.time}>
-                {slot.time}
-              </option>
-            ))}
+          {filteredSlots
+  .filter(
+    (slot) => slot.date === formData.date
+  )
+  .map((slot) => (
+    <option key={slot.id} value={slot.time}>
+      {slot.time}
+    </option>
+  ))}
         </select>
       </div>
       <div className="form-checkbox">
