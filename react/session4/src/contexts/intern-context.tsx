@@ -49,3 +49,4 @@ export function useInterns(): InternContextType {
   if (!context) throw new Error('useInterns must be used inside InternProvider')
   return context
 }
+

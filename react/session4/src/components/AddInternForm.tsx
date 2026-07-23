@@ -12,23 +12,57 @@ function AddInternForm() {
   }
 
   return (
-    <div>
+    <form
+      aria-label="Add Intern"
+      onSubmit={(e) => {
+        e.preventDefault()
+        handleSubmit()
+      }}
+    >
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <input name="name"  type="text"     value={form.name}       onChange={handleChange} placeholder="Name"  />
-      <input name="score" type="number"   value={form.score}       onChange={handleChange} placeholder="Score" />
-      <input name="isPresent" type="checkbox" checked={form.isPresent} onChange={handleChange} />
-      <label>Present</label>
+      <input
+        name="name"
+        type="text"
+        value={form.name}
+        onChange={handleChange}
+        placeholder="Name"
+      />
 
-      <select name="role" value={form.role} onChange={handleChange}>
+      <input
+        name="score"
+        type="number"
+        value={form.score}
+        onChange={handleChange}
+        placeholder="Score"
+      />
+
+      <input
+  id="present"
+  name="isPresent"
+  type="checkbox"
+  checked={form.isPresent}
+  onChange={handleChange}
+/>
+
+<label htmlFor="present">Present</label>
+
+      <select
+        name="role"
+        value={form.role}
+        onChange={handleChange}
+      >
         <option value="Frontend">Frontend</option>
         <option value="Backend">Backend</option>
         <option value="Fullstack">Fullstack</option>
       </select>
 
-      <button onClick={handleSubmit}>Add Intern</button>
-      <button onClick={handleReset}>Reset</button>
-    </div>
+      <button type="submit">Add Intern</button>
+
+      <button type="button" onClick={handleReset}>
+        Reset
+      </button>
+    </form>
   )
 }
 

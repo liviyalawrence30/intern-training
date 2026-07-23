@@ -2,45 +2,49 @@ import { useMemo } from 'react'
 import { useInterns } from '../contexts/intern-context'
 
 function ScoreStats() {
-  const { interns } = useInterns()
+  const { interns, isLoading } = useInterns()
 
+  // When useMemo is not used, stats are recalculated on every render.
+  // With useMemo, stats are recalculated only when the interns array changes.
+  const stats = useMemo(() => {
+    console.log('Recalculating stats...')
 
- 
-/*
-const stats = {
-  highest: scores.length > 0 ? Math.max(...scores) : 0,
-  lowest: scores.length > 0 ? Math.min(...scores) : 0,
-  average:
-    scores.length > 0
-      ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
-      : 0,
-  passing: interns.filter(i => i.score >= 50).length,
-}
-*/
+    const scores = interns.map(i => i.score)
 
+    return {
+      highest: scores.length > 0 ? Math.max(...scores) : 0,
+      lowest: scores.length > 0 ? Math.min(...scores) : 0,
+      average:
+        scores.length > 0
+          ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+          : 0,
+      passing: interns.filter(i => i.score >= 50).length,
+    }
+  }, [interns])
 
-//when useMemo is not used, stats are recalculated on every render.
-//with useMemo, stats are recalculated only when the intern array changes.
- const stats = useMemo(() => {
-  console.log('Recalculating stats...')
-
-  const scores = interns.map(i => i.score)
-
-  return {
-    highest: scores.length > 0 ? Math.max(...scores) : 0,
-    lowest: scores.length > 0 ? Math.min(...scores) : 0,
-    average:
-      scores.length > 0
-        ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
-        : 0,
-    passing: interns.filter(i => i.score >= 50).length,
+  if (isLoading) {
+    return <p>Loading interns...</p>
   }
-}, [interns])
 
   return (
-    <div style={{ padding: '12px', background: '#f9f9f9', marginBottom: '12px' }}>
-      <p>Highest: {stats.highest} | Lowest: {stats.lowest} | Avg: {stats.average}</p>
-      <p>Passing: {stats.passing} of {interns.length}</p>
+    <div
+      style={{
+        padding: '12px',
+        background: '#f9f9f9',
+        marginBottom: '12px',
+      }}
+    >
+      <p>
+        Highest: {stats.highest} | Lowest: {stats.lowest} | Avg: {stats.average}
+      </p>
+
+      <p>
+        Passing: {stats.passing} of {interns.length}
+      </p>
+
+      {interns.map((intern) => (
+        <p key={intern.id}>{intern.name}</p>
+      ))}
     </div>
   )
 }
