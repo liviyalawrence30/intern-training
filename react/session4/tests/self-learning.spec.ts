@@ -132,36 +132,35 @@ test.describe('Self Learning', () => {
 test('intern list visual comparison', async ({ page }) => {
   await page.goto('/');
 
-  // Wait until the initial interns are loaded
   await expect(
     page.getByRole('button', { name: 'Remove' })
   ).toHaveCount(4);
 
-  // Capture the baseline screenshot
+ 
   await expect(
     page.getByTestId('filtered-interns')
   ).toHaveScreenshot('intern-list-before.png');
 
-  // Add a new intern
+  
   await page.getByPlaceholder('Name').fill('Vikram');
   await page.getByPlaceholder('Score').fill('88');
   await page.getByRole('combobox').selectOption('Backend');
   await page.getByRole('button', { name: 'Add Intern' }).click();
 
-  // Verify the list changed
+  
   await expect(
     page.getByTestId('filtered-interns')
   ).not.toHaveScreenshot('intern-list-before.png');
 });
 
 
-test('reads CSS variable with page.evaluate()', async ({ page }) => {
+
+test('reads navbar background with page.evaluate()', async ({ page }) => {
   await page.goto('/');
 
   const before = await page.evaluate(() => {
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue('--background-color')
-      .trim();
+    const nav = document.querySelector('nav');
+    return nav ? getComputedStyle(nav).backgroundColor : '';
   });
 
   await page.getByRole('button', {
@@ -169,9 +168,8 @@ test('reads CSS variable with page.evaluate()', async ({ page }) => {
   }).click();
 
   const after = await page.evaluate(() => {
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue('--background-color')
-      .trim();
+    const nav = document.querySelector('nav');
+    return nav ? getComputedStyle(nav).backgroundColor : '';
   });
 
   expect(before).not.toBe(after);

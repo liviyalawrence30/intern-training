@@ -62,7 +62,7 @@ test.describe('Journeys via Page Object', () => {
 
 
 test('chromium-only feature check', async ({ page, browserName }) => {
-  // Skip this test on Firefox and WebKit
+  // Skips this test on Firefox and WebKit
   test.skip(
     browserName !== 'chromium',
     'This test targets Chromium-specific behaviour only'
