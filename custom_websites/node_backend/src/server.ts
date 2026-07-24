@@ -42,3 +42,4 @@ app.listen(settings.PORT, async () => {
   await initDatabase();
   console.log(`⚡ [server]: Modular Express TypeScript Backend running at http://localhost:${settings.PORT}`);
 });
+
