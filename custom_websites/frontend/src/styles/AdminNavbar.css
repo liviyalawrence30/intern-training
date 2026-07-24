@@ -62,3 +62,23 @@
     padding: 4px 10px;
   }
 }
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-btn:hover {
+  opacity: 0.8;
+}
+
+.admin-actions {
+  display: flex;
+  align-items: center;
+}

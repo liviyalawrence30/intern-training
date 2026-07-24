@@ -2,22 +2,25 @@ import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FaLaptopCode, FaBars, FaTimes } from "react-icons/fa";
 import "../../styles/Navbar.css";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const darkMode = localStorage.getItem("theme") === "dark";
+  const [darkMode, setDarkMode] = useState(
+  localStorage.getItem("theme") === "dark"
+);
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark-theme");
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.body.classList.remove("dark-theme");
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("theme", "light");
-    }
-  }, []);
+  if (darkMode) {
+    document.body.classList.add("dark-theme");
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.body.classList.remove("dark-theme");
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
+  }
+}, [darkMode]);
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
@@ -26,6 +29,9 @@ function Navbar() {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+  const toggleTheme = () => {
+  setDarkMode((prev) => !prev);
+};
 
   return (
     <header className="navbar">
@@ -75,7 +81,16 @@ function Navbar() {
                 Reviews
               </NavLink>
             </li>
+
+              <button
+  className="theme-btn"
+  onClick={toggleTheme}
+  aria-label="Toggle Theme"
+>
+  {darkMode ? <FaSun /> : <FaMoon />}
+</button>
           </ul>
+   
         </nav>
       </div>
     </header>
