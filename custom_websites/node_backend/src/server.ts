@@ -5,7 +5,6 @@ import { websiteRequestRouter } from "./routers/websiteRequestRouter.js";
 import { bookingRouter } from "./routers/bookingRouter.js";
 import { slotRouter } from "./routers/slotRouter.js";
 import { dashboardRouter } from "./routers/dashboardRouter.js";
-
 import { initDatabase } from "./database/database.js";
 
 const app = express();
