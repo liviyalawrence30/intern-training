@@ -1,72 +1,50 @@
-/* ==========================================================================
-   GOURMET BISTRO & DINING - SIMPLE JAVASCRIPT FUNCTIONALITY
-   ========================================================================== */
+/* ==========================
+   MOBILE MENU
+========================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+const menuToggle = document.getElementById("mobile-toggle");
+const navMenu = document.getElementById("nav-menu");
 
-  // 1. Sticky Navbar & Active Scroll Spy
-  const navbar = document.getElementById('navbar');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[id]');
+menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+});
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+document.querySelectorAll(".nav-list a").forEach(link => {
+    link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+    });
+});
 
-    let currentScroll = window.scrollY + 100;
-    sections.forEach((sec) => {
-      const secTop = sec.offsetTop;
-      const secHeight = sec.offsetHeight;
-      const secId = sec.getAttribute('id');
 
-      if (currentScroll >= secTop && currentScroll < secTop + secHeight) {
-        navLinks.forEach((link) => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${secId}`) {
-            link.classList.add('active');
-          }
+/* ==========================
+   MENU FILTER
+========================== */
+
+const filterButtons = document.querySelectorAll(".menu-btn");
+const menuCards = document.querySelectorAll(".menu-card");
+
+filterButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+
+        menuCards.forEach(card => {
+
+            if (
+                filter === "all" ||
+                card.dataset.category === filter
+            ) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+
         });
-      }
+
     });
-  });
-
-  // 2. Mobile Nav Toggle
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const navMenu = document.getElementById('nav-menu');
-
-  mobileToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-  });
-
-  navLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-    });
-  });
-
-  // 3. Menu Category Filter
-  const mBtns = document.querySelectorAll('.m-btn');
-  const menuItems = document.querySelectorAll('.menu-item');
-
-  mBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      mBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterVal = btn.getAttribute('data-filter');
-
-      menuItems.forEach((item) => {
-        const category = item.getAttribute('data-category');
-        if (filterVal === 'all' || category === filterVal) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
 
 });
