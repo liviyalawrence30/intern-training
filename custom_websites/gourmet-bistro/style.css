@@ -234,14 +234,24 @@ button{
 .mobile-toggle{
     display:none;
     font-size:28px;
-    color:#222;
-    cursor:pointer;
+    color:var(--white);
 }
 
 /*==============================
     RESPONSIVE NAVBAR
 ==============================*/
+@media (max-width:768px){
 
+    .nav-list a{
+        color:var(--white);
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active{
+        color:var(--primary);
+    }
+
+}
 @media (max-width:768px){
 
     .mobile-toggle{
@@ -249,14 +259,14 @@ button{
     }
 
     .nav-menu{
-        position:absolute;
-        top:80px;
-        left:0;
-        width:100%;
-        background:#fff;
-        display:none;
-        box-shadow:0 8px 20px rgba(0,0,0,.08);
-    }
+    position:absolute;
+    top:80px;
+    left:0;
+    width:100%;
+    background:var(--bg-dark);
+    display:none;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
 
     .nav-menu.active{
         display:block;
@@ -803,7 +813,9 @@ color:var(--primary);
 ==============================*/
 
 .opening-hours{
-    background:#ffffff;
+    
+    background:var(--bg-card);
+
     padding:35px;
     border-radius:20px;
     box-shadow:0 10px 25px rgba(0,0,0,.08);
@@ -826,7 +838,7 @@ color:var(--primary);
     align-items:center;
     padding:15px 0;
     border-bottom:1px solid #eee;
-    color:#555;
+    color:var(--white);
 }
 
 .opening-hours li:last-child{
