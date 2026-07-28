@@ -1,7 +1,7 @@
 import restaurant from "../assets/portfolio/restaurant.jpg";
 import personalPortfolio from "../assets/portfolio/personal.png";
 import fashionStore from "../assets/portfolio/fashion.jpg";
-import realestate from "../assets/portfolio/realestate.png";
+
 import techagency from "../assets/portfolio/techagency.png";
 
 export interface PortfolioItem {
@@ -54,21 +54,10 @@ export const portfolio: PortfolioItem[] = [
     idealFor: ["Fashion Brands", "Boutiques", "E-Commerce Stores"],
   },
 
-  {
-    id: 4,
-    image: realestate,
-    title: "Horizon Luxury Properties",
-    client: "Horizon Real Estate Group",
-    shortDescription: "Real Estate & Property Listings Site",
-    demoUrl:
-      "https://liviyalawrence30.github.io/intern-training/custom_websites/horizon-realestate/",
-    description:
-      "A luxury property platform created for Horizon Real Estate. Features interactive property search filters, virtual property tours, agent contact forms, and mortgage calculators.",
-    idealFor: ["Real Estate Agencies", "Property Managers", "Brokers"],
-  },
+  
 
   {
-    id: 5,
+    id: 4,
     image: techagency,
     title: "CloudFlow SaaS Platform",
     client: "CloudFlow Technologies",
