@@ -53,9 +53,6 @@ export const portfolio: PortfolioItem[] = [
       "A modern e-commerce storefront crafted for Aura Boutique. Built with fast catalog loading, product filtering, shopping cart, customer wishlists, and checkout flow.",
     idealFor: ["Fashion Brands", "Boutiques", "E-Commerce Stores"],
   },
-
-  
-
   {
     id: 4,
     image: techagency,
