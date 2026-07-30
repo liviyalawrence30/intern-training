@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
-
 import Home from "./pages/Home";
 import Templates from "./pages/Templates";
 import Pricing from "./pages/Pricing";

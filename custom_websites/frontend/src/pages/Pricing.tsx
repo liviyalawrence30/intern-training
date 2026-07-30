@@ -23,7 +23,7 @@ function Pricing() {
                 title={plan.title}
                 price={plan.price}
                 features={plan.features}
-                featured={plan.title === "Standard"}
+                
               />
             ))}
           </div>

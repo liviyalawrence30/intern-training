@@ -4,17 +4,17 @@ type PricingCardProps = {
   title: string;
   price: string;
   features: string[];
-  featured?: boolean;
+ 
 };
 
 function PricingCard({
   title,
   price,
   features,
-  featured = false,
+  
 }: PricingCardProps) {
   return (
-    <div className={`pricing-card ${featured ? "featured" : ""}`}>
+    <div className="pricing-card ">
       <h3>{title}</h3>
 
       <h1>{price}</h1>

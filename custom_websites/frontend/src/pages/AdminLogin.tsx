@@ -9,7 +9,7 @@ function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (event: React.FormEvent) => {
+  const handleLogin = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (
