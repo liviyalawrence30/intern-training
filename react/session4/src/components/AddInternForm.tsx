@@ -2,14 +2,13 @@ import useInternForm from '../hooks/useInternForm'
 import { useInterns } from '../contexts/intern-context'
 
 function AddInternForm() {
-  const { form, error, handleChange, handleReset, isValid } = useInternForm()
-  const { addIntern, interns } = useInterns()
+  const { addIntern } = useInterns()
+  const { form, error, handleChange, handleReset, submit } = useInternForm(addIntern)
+  
 
   function handleSubmit(): void {
-    if (!isValid()) return
-    addIntern({ id: interns.length + 1, ...form })
-    handleReset()
-  }
+  submit()
+}
 
   return (
     <div>
