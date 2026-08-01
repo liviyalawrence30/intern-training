@@ -1,3 +1,12 @@
+/* 
+Testability audit - useInternForm.ts
+Yes - given the same form state and the same user input, it always produce the same result.
+Yes- It does not use APIs,timers,localstorage,random values or other external services.
+Partially - validation logic depends on the hook's internal React state instead of accepting data as parameters, so it cannot be tested completely independently.
+Verdict : Moderately testable
+*/
+
+
 import { useState } from 'react'
 
 interface InternFormState {

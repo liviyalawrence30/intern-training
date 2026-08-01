@@ -1,3 +1,9 @@
+//Testability audit - ScoreStats.tsx
+//yes, given the same interns array, it always produces the same statistics.
+//Partially,The component depends on the React Context (useInterns) to get its data, but it does not use APIs, timers, or browser APIs.
+//no,The interns data comes directly from the context instead of being passed as props, making it harder to test in isolation.
+//verdict: Moderately testable.
+
 import { useMemo } from 'react'
 import { useInterns } from '../contexts/intern-context'
 

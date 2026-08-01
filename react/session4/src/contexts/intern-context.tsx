@@ -1,3 +1,10 @@
+//Testability audit — intern-context.tsx
+//yes, given the same initial state and the same sequence of actions, it always produces the same result.
+//no,It uses useEffect and setTimeout, introducing asynchronous behavior that makes testing more complex.
+//no,The initial data and timeout are hard-coded inside the provider and cannot be passed in during tests.
+//verdict: Low testability.
+
+
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 
 interface Intern {

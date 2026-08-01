@@ -1,3 +1,9 @@
+//Testability audit 
+//yes, if we give the same interns array and search item, it always returns the same filtered list and statistics.
+//yes, It does not use APIs,timers,browser storage, or other external services.It only uses react state and memoization.
+//yes,The interns data is passed as a parameter, and the search value can be controlled through the hook's setter.
+//Verdict: Highly testable.
+
 import { useState, useMemo } from 'react'
 
 interface Intern {
