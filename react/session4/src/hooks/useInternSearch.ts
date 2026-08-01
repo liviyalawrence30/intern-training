@@ -21,7 +21,10 @@ interface UseInternSearchReturn {
   }
 }
 
-function useInternSearch(interns: Intern[]): UseInternSearchReturn {
+function useInternSearch(
+  interns: Intern[],
+  filter: typeof filterInterns = filterInterns
+): UseInternSearchReturn {
   const [search, setSearch] = useState<string>('')
 
 /*
@@ -34,10 +37,9 @@ function useInternSearch(interns: Intern[]): UseInternSearchReturn {
  without useMemo filtering renders multiple times. 
  Using useMemo eliminates unnecessary work.*/
   const filtered = useMemo(
-  () => filterInterns(interns, search),
-  [interns, search]
+  () => filter(interns, search),
+  [interns, search, filter]
 )
-
   const stats = useMemo(() => ({
     total:   interns.length,
     present: interns.filter(i => i.isPresent).length,
@@ -50,3 +52,8 @@ function useInternSearch(interns: Intern[]): UseInternSearchReturn {
 }
 
 export default useInternSearch
+
+/*
+Injecting the filter works, but it's unnecessary here since filterInterns is already a pure function. 
+It's more useful for external dependencies like APIs or timers.
+*/
