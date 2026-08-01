@@ -60,5 +60,5 @@ It's more useful for external dependencies like APIs or timers.
 
 /*
 Adding filter to the dependency array did not cause any re-render issues because the filter function reference stayed the same. 
-The filtered list updates only when interns, search, or filter changes.
+The filtered list updates only when interns, search  or filter changes.
 */
