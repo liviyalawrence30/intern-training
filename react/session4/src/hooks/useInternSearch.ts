@@ -3,7 +3,7 @@
 //yes, It does not use APIs,timers,browser storage, or other external services.It only uses react state and memoization.
 //yes,The interns data is passed as a parameter, and the search value can be controlled through the hook's setter.
 //Verdict: Highly testable.
-
+import { filterInterns } from '../utils/intern-utils'
 import { useState, useMemo } from 'react'
 
 interface Intern {
@@ -33,11 +33,10 @@ function useInternSearch(interns: Intern[]): UseInternSearchReturn {
  Observation: In the console,it shows "Filtering" multiple times.
  without useMemo filtering renders multiple times. 
  Using useMemo eliminates unnecessary work.*/
-  const filtered = useMemo<Intern[]>(() =>
-    interns.filter(i =>
-      i.name.toLowerCase().includes(search.toLowerCase())
-    ),
-  [interns, search])
+  const filtered = useMemo(
+  () => filterInterns(interns, search),
+  [interns, search]
+)
 
   const stats = useMemo(() => ({
     total:   interns.length,

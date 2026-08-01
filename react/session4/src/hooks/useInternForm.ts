@@ -6,7 +6,7 @@ Partially - validation logic depends on the hook's internal React state instead 
 Verdict : Moderately testable
 */
 
-
+import { validateInternForm } from '../utils/intern-validation'
 import { useState } from 'react'
 
 interface InternFormState {
@@ -52,11 +52,16 @@ function useInternForm(): UseInternFormReturn {
   }
 
   function isValid(): boolean {
-    if (!form.name.trim()) { setError('Name is required'); return false }
-    if (form.score < 0 || form.score > 100) { setError('Score must be 0–100'); return false }
-    setError('')
-    return true
+  const errorMessage = validateInternForm(form.name, form.score)
+
+  if (errorMessage) {
+    setError(errorMessage)
+    return false
   }
+
+  setError('')
+  return true
+}
 
   return { form, error, handleChange, handleReset, isValid }
 }
