@@ -15,13 +15,21 @@ interface InternFormState {
   isPresent: boolean
   role:      string
 }
-
+interface Intern {
+  id: number
+  name: string
+  score: number
+  isPresent: boolean
+  role: string
+}
 interface UseInternFormReturn {
-  form:         InternFormState
-  error:        string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
-  handleReset:  () => void
-  isValid:      () => boolean
+  form: InternFormState
+  error: string
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void
+  handleReset: () => void
+  submit: () => boolean
 }
 /* The return type interface tells what exactly the custom hook returns.
 It improves type safety, makes it easier to understand and maintain. */
@@ -30,7 +38,10 @@ const initialForm: InternFormState = {
   name: '', score: 0, isPresent: true, role: 'Frontend',
 }
 
-function useInternForm(): UseInternFormReturn {
+function useInternForm(
+  addIntern: (intern: Intern) => void,
+  generateId: () => number = () => Date.now()
+): UseInternFormReturn {
   const [form,  setForm]  = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>('')
 
@@ -51,7 +62,7 @@ function useInternForm(): UseInternFormReturn {
     setError('')
   }
 
-  function isValid(): boolean {
+ function submit(): boolean {
   const errorMessage = validateInternForm(form.name, form.score)
 
   if (errorMessage) {
@@ -59,11 +70,24 @@ function useInternForm(): UseInternFormReturn {
     return false
   }
 
+  addIntern({
+    id: generateId(),
+    ...form,
+  })
+
   setError('')
+  handleReset()
+
   return true
 }
 
-  return { form, error, handleChange, handleReset, isValid }
+  return {
+  form,
+  error,
+  handleChange,
+  handleReset,
+  submit,
+}
 }
 
 export default useInternForm

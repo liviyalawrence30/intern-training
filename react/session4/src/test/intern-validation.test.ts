@@ -33,3 +33,19 @@ describe('validateInternForm', () => {
 
 //Only one line of arrange is required for each test.
 //Testing the same logic through the hook with renderHook would require more setup, such as rendering the hook, updating state, and handling React.
+
+
+
+//Task 6.2
+
+/*
+| Test | Fast? | Independent? | Repeatable? | Self-validating? | Timely? |
+|------|-------|--------------|-------------|------------------|---------|
+| `validateInternForm` tests | yes| yes| yes| yes| yes|
+| `useInternForm` hook tests | yes| yes| yes| yes| yes|
+| `SummaryBar` presentational tests | yes| yes| yes| yes| yes|
+| `filterInterns` utility tests | yes| yes| yes| yes| yes|
+*/
+
+//validateInternForm function benefited most from refactoring.
+//scorestats still needs some refactoring.
