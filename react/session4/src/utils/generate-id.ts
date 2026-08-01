@@ -4,3 +4,6 @@ export function generateInternId(
 ): string {
   return `intern-${now()}-${random()}`
 }
+
+//Injecting the clock made the function easier to test because a fixed time could be passed. 
+// No mocking of Date.now was needed.

@@ -15,3 +15,8 @@ export function filterInterns(interns: Intern[], searchTerm: string): Intern[] {
       intern.role.toLowerCase().includes(term)
   )
 }
+
+/*
+Extracting pure functions alone did not change the coverage.
+Coverage increased only after writing direct tests for validateInternForm and filterInterns.
+*/

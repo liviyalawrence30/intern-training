@@ -26,3 +26,27 @@ describe('InternProvider', () => {
 })
 //Injecting generateId makes the code easier to test because a fixed ID can be used during testing. 
 // The default behavior still generates sequential IDs, while tests remain predictable and repeatable.
+
+test('explore: adds an intern using the real provider', () => {
+  const wrapper = ({ children }: { children: React.ReactNode }) => (
+    <InternProvider>
+      {children}
+    </InternProvider>
+  )
+
+  const { result } = renderHook(() => useInterns(), { wrapper })
+
+  act(() => {
+    result.current.addIntern({
+      name: 'Maria',
+      score: 95,
+      role: 'Frontend',
+      isPresent: true,
+    })
+  })
+
+  expect(result.current.interns.at(-1)?.name).toBe('Maria')
+  expect(result.current.interns.at(-1)?.score).toBe(95)
+  expect(result.current.interns.at(-1)?.role).toBe('Frontend')
+  expect(result.current.interns.at(-1)?.isPresent).toBe(true)
+})
