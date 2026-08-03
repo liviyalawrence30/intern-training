@@ -54,3 +54,35 @@ But branches and functions does not pass the threshold.
 
 The above test can be added and other tests like test('returns 0 for highest, lowest, and average when there are no interns') can be added.
 
+## section 3 - Task 3.1
+
+Tests failed:
+useInternForm.test.ts failed.
+inter-validation.test.ts failed.
+
+Expected: "Name is required"
+Received: "Wrong message"
+
+about 4 seconds
+
+## comment 
+If I need to manually check this it would take me around minimum of 15 minutes.
+
+# section 3 - Task 3.2
+Failed test is in intern-dashboard-spec.ts
+The button text changed to sumbit intern from add intern - locator failed.
+
+## comment
+Unit tests failures show the expected and actual values, making it easy to identify the expected and actual values.
+E2E test failures provide more context by showing the failed browser action , the locator state, screenshot and application state . 
+It makes it easier to understand where and why the failure occurred.
+
+# section 3 - Task 3.3
+
+None of the existing tests needed to be changed because adding the pass/fail badge didn't affect the existing functionality.
+I added a new unit test for getScoreLable() to make sure it returns the correct label based on the intern's score.
+
+## comment
+The definition of done is that the feature renders correctly and all tests pass successfully.
+Just displaying the feature isn't enough.
+
