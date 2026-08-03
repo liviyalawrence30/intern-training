@@ -125,3 +125,16 @@ npm run test: coverage generates the coverage report and checks whether the requ
 
 I didn't find any test with the risks mentioned above.
 
+
+# section 5 - Task 5.1
+
+| Feature | Unit test? | Component test? | E2E test? | What's missing? |
+|---------|-----------|----------------|----------|----------------|
+| Score validation (0–100) | yes|no |yes | component test|
+| Attendance toggle (isPresent) | no|no |yes |unit and component test |
+| Search filtering by name |yes |no |yes |component test |
+| Add intern form submission |yes |no | yes| component test|
+
+## comment
+I would add a component test for the search feature.
+It gives good confidence that the UI updates correctly when the user searches and it requires less setup than E2E tests.
