@@ -155,3 +155,22 @@ Complete this comparison table based on your experience in all the testing sessi
 
 ## comment
 unit tests helps to catch the bugs earlier and faster.
+
+# explore
+
+# 1.
+All the tests run successfully. 
+
+# 2.
+Adding retries : 1 didnt affect my tests because they were already passing.
+Retries can help with flaky tests but they can also hide real failures if used unnecessarily.
+
+# 3.
+The timeout didnt affect the test because it finished quickly.
+If the test had an await that never resolved, it would fail after 5 seconds with a timeout error instead of running forever.
+
+# 4.
+Test sharding splits the tests into smaller groups so they can run in parallel.
+This makes E2E test suites finish much faster.
+
+

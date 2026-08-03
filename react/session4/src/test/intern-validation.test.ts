@@ -49,3 +49,12 @@ describe('validateInternForm', () => {
 
 //validateInternForm function benefited most from refactoring.
 //scorestats still needs some refactoring.
+
+/* explore
+test(
+  'returns null when score is exactly 100',
+  { timeout: 5000 },
+  () => {
+    expect(validateInternForm('Rahul', 100)).toBeNull()
+  }
+)*/

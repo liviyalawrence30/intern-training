@@ -14,7 +14,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   timeout: 30000,
-
+ 
   use: {
     // Sets the default URL used by Playwright when navigating to pages.
     baseURL: 'http://localhost:5173',
@@ -45,3 +45,5 @@ projects: [
 /*Examples of mobile device presets available in Playwright:
 devices['iPhone 14']
  devices['Pixel 7']*/
+
+ 
