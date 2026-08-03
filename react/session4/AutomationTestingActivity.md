@@ -86,3 +86,42 @@ I added a new unit test for getScoreLable() to make sure it returns the correct 
 The definition of done is that the feature renders correctly and all tests pass successfully.
 Just displaying the feature isn't enough.
 
+# section 4 - Task 4.1
+
+| Stage | What runs | What it checks | Blocks merge if? |
+|-------|-----------|---------------|-----------------|
+| On every push | unit tests,component tests, coverage|application's logic,components and code coverage|Yes., is the tests or the coverage fail. |
+| On every pull request |unit tests, coverage tests, E2E tests, coverage | check if the application follows the user work flow before merging |yes,if any tests fails.|
+| Before merge to main | Full CI pipeline| checks the all quality checks| Yes, if any quality checks fail.|
+
+## comment
+Unit tests run on every push because they take less time and are easier.
+E2E tests longer time since they check the workflow on the real browser, so they usually run on PRs.
+
+The tradeoff is between speed and confidence.
+
+# section 4 - Task 4.2
+
+1. The pipeline runs on very push to any branch and on very pull request
+trageting the 'main' branch.
+2. 'needs: unti-tests' ensure that the E2E tests run only after the unit tests have passed.
+If the unit tests fail, the E2E tests will not run.
+3. npm ci - installs all project dependencies.
+npm run test:run - it runs the unit and component tests to verify the application's logic and functionality.
+npm run test: coverage generates the coverage report and checks whether the required code coverage threshold is met.
+4. No. e2e runs successfully when the unit tests run successfully.
+5. I would add a coverage threshold of 80% in the vitest configuration and configure the pull request to require the CI pipeline to pass before merging.
+
+## section 4 - Task 4.3
+
+| Risk | Yes/No | File or test name |
+|------|--------|-----------------|
+| Any test that uses `test.skip`? | No| |
+| Any test that uses `console.log` (not asserted)? | No| |
+| Any test that calls `fetch` without mocking? | No| |
+| Any test that calls `new Date()` inline? | No| |
+| Any test over 500ms? (`npx vitest run --reporter verbose`) |No | |
+| Any flaky test (run the suite 3 times — does anything fail once)? |No | |
+
+I didn't find any test with the risks mentioned above.
+
