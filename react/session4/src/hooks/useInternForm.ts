@@ -1,3 +1,12 @@
+/* 
+Testability audit - useInternForm.ts
+Yes - given the same form state and the same user input, it always produce the same result.
+Yes- It does not use APIs,timers,localstorage,random values or other external services.
+Partially - validation logic depends on the hook's internal React state instead of accepting data as parameters, so it cannot be tested completely independently.
+Verdict : Moderately testable
+*/
+
+import { validateInternForm } from '../utils/intern-validation'
 import { useState } from 'react'
 
 interface InternFormState {
@@ -6,13 +15,21 @@ interface InternFormState {
   isPresent: boolean
   role:      string
 }
-
+interface Intern {
+  id: number
+  name: string
+  score: number
+  isPresent: boolean
+  role: string
+}
 interface UseInternFormReturn {
-  form:         InternFormState
-  error:        string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void
-  handleReset:  () => void
-  isValid:      () => boolean
+  form: InternFormState
+  error: string
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void
+  handleReset: () => void
+  submit: () => boolean
 }
 /* The return type interface tells what exactly the custom hook returns.
 It improves type safety, makes it easier to understand and maintain. */
@@ -21,35 +38,67 @@ const initialForm: InternFormState = {
   name: '', score: 0, isPresent: true, role: 'Frontend',
 }
 
-function useInternForm(): UseInternFormReturn {
+function useInternForm(
+  addIntern: (intern: Intern) => void,
+  generateId: () => number = () => Date.now()
+): UseInternFormReturn {
   const [form,  setForm]  = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>('')
 
+ 
+
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void {
-    const { name, value, type } = e.target
-    setForm(prev => ({
-      ...prev,
-      [name]: type === 'checkbox'
-        ? (e.target as HTMLInputElement).checked
-        : name === 'score' ? Number(value) : value,
-    }))
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+): void {
+  const { name, value, type } = e.target
+
+  const updatedValue =
+    type === 'checkbox'
+      ? (e.target as HTMLInputElement).checked
+      : name === 'score'
+        ? Number(value)
+        : value
+
+  const nextForm = {
+    ...form,
+    [name]: updatedValue,
   }
 
-  function handleReset(): void {
-    setForm(initialForm)
-    setError('')
+  setForm(nextForm)
+
+  const errorMessage = validateInternForm(nextForm.name, nextForm.score)
+  setError(errorMessage ?? '')
+}
+function handleReset(): void {
+  setForm(initialForm)
+  setError('')
+}
+ function submit(): boolean {
+  const errorMessage = validateInternForm(form.name, form.score)
+
+  if (errorMessage) {
+    setError(errorMessage)
+    return false
   }
 
-  function isValid(): boolean {
-    if (!form.name.trim()) { setError('Name is required'); return false }
-    if (form.score < 0 || form.score > 100) { setError('Score must be 0–100'); return false }
-    setError('')
-    return true
-  }
+  addIntern({
+    id: generateId(),
+    ...form,
+  })
 
-  return { form, error, handleChange, handleReset, isValid }
+  setError('')
+  handleReset()
+
+  return true
+}
+
+  return {
+  form,
+  error,
+  handleChange,
+  handleReset,
+  submit,
+}
 }
 
 export default useInternForm

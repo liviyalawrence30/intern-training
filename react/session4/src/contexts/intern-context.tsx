@@ -1,19 +1,32 @@
+//Testability audit — intern-context.tsx
+//yes, given the same initial state and the same sequence of actions, it always produces the same result.
+//no,It uses useEffect and setTimeout, introducing asynchronous behavior that makes testing more complex.
+//no,The initial data and timeout are hard-coded inside the provider and cannot be passed in during tests.
+//verdict: Low testability.
+
+
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 
 interface Intern {
   id: number; name: string; score: number; role: string; isPresent: boolean
 }
+type NewIntern = Omit<Intern, 'id'>
 
 interface InternContextType {
-  interns:      Intern[]
-  isLoading:    boolean
-  addIntern:    (intern: Intern) => void
+  interns: Intern[]
+  isLoading: boolean
+  addIntern: (intern: NewIntern) => void
   removeIntern: (id: number) => void
 }
-
 const InternContext = createContext<InternContextType | null>(null)
-
-export function InternProvider({ children }: { children: ReactNode }) {
+interface InternProviderProps {
+  children: ReactNode
+  generateId?: (interns: Intern[]) => number
+}
+export function InternProvider({
+  children,
+  generateId = (interns) => interns.length + 1,
+}: InternProviderProps) {
   const [interns,   setInterns]   = useState<Intern[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -29,9 +42,15 @@ export function InternProvider({ children }: { children: ReactNode }) {
     }, 800)
   }, [])
 
-  function addIntern(intern: Intern): void {
-    setInterns(prev => [...prev, intern])
-  }
+  function addIntern(intern: NewIntern): void {
+  setInterns(prev => [
+    ...prev,
+    {
+      id: generateId(prev),
+      ...intern,
+    },
+  ])
+}
 
   function removeIntern(id: number): void {
     setInterns(prev => prev.filter(i => i.id !== id))

@@ -3,16 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../../api/api";
 import "../../styles/BookingForm.css";
-
 interface Slot {
   id: number;
   date: string;
   time: string;
   is_available: boolean;
 }
-
 function BookingForm() {
-
   const location = useLocation();
 const navigate = useNavigate();
 
