@@ -138,3 +138,20 @@ I didn't find any test with the risks mentioned above.
 ## comment
 I would add a component test for the search feature.
 It gives good confidence that the UI updates correctly when the user searches and it requires less setup than E2E tests.
+
+## section 6 - Task 6.1
+
+**Task 6.1 — Before vs After**
+
+Complete this comparison table based on your experience in all the testing sessions:
+
+| | Before testing sessions | After testing sessions |
+|--|------------------------|----------------------|
+| How do you know a change didn't break anything? |I would have to test them manually. | I would run the test suite.|
+| How long does it take to verify the app works? | several minutes|few minutes |
+| How confident are you to refactor old code? | less confident| more confident|
+| How do you find out about a regression? | manually| I would run the component tests,e2e tests|
+
+
+## comment
+unit tests helps to catch the bugs earlier and faster.
