@@ -9,6 +9,9 @@ export default defineConfig({
     exclude: [
       'tests/**',
       'node_modules/**',
-    ],
+    ]
+   
+  
   },
+  
 })
