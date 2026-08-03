@@ -3,44 +3,45 @@ import { renderHook, act } from '@testing-library/react'
 import useInternForm from '../hooks/useInternForm'
 
 describe('useInternForm', () => {
-  test('submit calls addIntern with the correct data', () => {
-    const addIntern = vi.fn()
+ test('submit calls addIntern with the correct data', () => {
+  const addIntern = vi.fn()
 
-    const { result } = renderHook(() =>
-      useInternForm(addIntern, () => 999)
-    )
+  const { result } = renderHook(() =>
+    useInternForm(addIntern, () => 999)
+  )
 
-    act(() => {
-  result.current.handleChange({
-    target: {
-      name: 'name',
-      value: 'Rahul',
-      type: 'text',
-    },
-  } as React.ChangeEvent<HTMLInputElement>)
-
-  result.current.handleChange({
-    target: {
-      name: 'score',
-      value: '92',
-      type: 'number',
-    },
-  } as React.ChangeEvent<HTMLInputElement>)
-})
-
-act(() => {
-  result.current.submit()
-})
-
-    expect(addIntern).toHaveBeenCalledWith({
-      id: 999,
-      name: 'Rahul',
-      score: 92,
-      role: 'Frontend',
-      isPresent: true,
-    })
+  act(() => {
+    result.current.handleChange({
+      target: {
+        name: 'name',
+        value: 'Rahul',
+        type: 'text',
+      },
+    } as React.ChangeEvent<HTMLInputElement>)
   })
 
+  act(() => {
+    result.current.handleChange({
+      target: {
+        name: 'score',
+        value: '92',
+        type: 'number',
+      },
+    } as React.ChangeEvent<HTMLInputElement>)
+  })
+
+  act(() => {
+    result.current.submit()
+  })
+
+  expect(addIntern).toHaveBeenCalledWith({
+    id: 999,
+    name: 'Rahul',
+    score: 92,
+    role: 'Frontend',
+    isPresent: true,
+  })
+})
   test('submit does not call addIntern when validation fails', () => {
     const addIntern = vi.fn()
 
@@ -77,7 +78,9 @@ act(() => {
       type: 'text',
     },
   } as React.ChangeEvent<HTMLInputElement>)
+})
 
+act(() => {
   result.current.handleChange({
     target: {
       name: 'score',
