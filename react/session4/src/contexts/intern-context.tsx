@@ -28,6 +28,40 @@ interface InternProviderProps {
   children: ReactNode
   generateId?: (interns: Intern[]) => number
 }
+
+function validateInternResponse(data: unknown): Intern[] {
+  if (!Array.isArray(data)) {
+    throw new Error(
+      `validateInternResponse: expected an array, got ${typeof data}`
+    )
+  }
+
+  return data.map((item, index) => {
+    if (
+      typeof item !== 'object' ||
+      item === null ||
+      typeof (item as Intern).name !== 'string' ||
+      !(item as Intern).name.trim()
+    ) {
+      throw new Error(
+        `validateInternResponse: item[${index}].name is invalid`
+      )
+    }
+
+    if (
+      typeof (item as Intern).score !== 'number' ||
+      (item as Intern).score < 0 ||
+      (item as Intern).score > 100
+    ) {
+      throw new Error(
+        `validateInternResponse: item[${index}].score is invalid, got: ${(item as Intern).score}`
+      )
+    }
+
+    return item as Intern
+  })
+}
+
 export function InternProvider({
   children,
   generateId = (interns) => interns.length + 1,
@@ -35,17 +69,21 @@ export function InternProvider({
   const [interns,   setInterns]   = useState<Intern[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  useEffect(() => {
-    setTimeout(() => {
-      setInterns([
-        { id: 1, name: 'Rahul', score: 92, role: 'Frontend',  isPresent: true  },
-        { id: 2, name: 'Priya', score: 78, role: 'Backend',   isPresent: true  },
-        { id: 3, name: 'Amit',  score: 45, role: 'Frontend',  isPresent: false },
-        { id: 4, name: 'Sneha', score: 95, role: 'Fullstack', isPresent: true  },
-      ])
-      setIsLoading(false)
-    }, 800)
-  }, [])
+ useEffect(() => {
+  setTimeout(() => {
+    const data = [
+      { id: 1, name: 'Rahul', score: 92, role: 'Frontend', isPresent: true },
+      { id: 2, name: 'Priya', score: 78, role: 'Backend', isPresent: true },
+      { id: 3, name: 'Amit', score: 45, role: 'Frontend', isPresent: false },
+      { id: 4, name: 'Sneha', score: 95, role: 'Fullstack', isPresent: true },
+    ]
+
+    const validatedInterns = validateInternResponse(data)
+
+    setInterns(validatedInterns)
+    setIsLoading(false)
+  }, 800)
+}, [])
 
   function addIntern(intern: NewIntern): void {
   setInterns(prev => [

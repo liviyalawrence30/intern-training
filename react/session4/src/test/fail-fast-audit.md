@@ -96,4 +96,13 @@ The validation logic handles the expected user input errors by returning validat
 The post condition is mostly documentation.The filter() always returns an array.
 It is useful when the implementation changes later , helping to detect the unexpected behaviour. 
 
+## section 6 - Task 6.1
+With the validation, the malformed data is rejected immediately.
+Without the validation, the malformed data will be added in the intern list.
+
+## section 6 - task 6.2
+
+The checks run at import time when the configuration file is loaded.
+Failing at import time is better than because configuration failures are detected immediately when the application starts
+instead of causing errors later when the configuration is used.
 
