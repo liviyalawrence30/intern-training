@@ -70,7 +70,7 @@ export function InternProvider({
 
 export function useInterns(): InternContextType {
   const context = useContext(InternContext)
-  if (!context) throw new Error('useInterns must be used inside InternProvider')
+  if (!context) throw new Error('useInterns: expected to be used inside InternProvider, but no provider was found.')
   return context
 }
 

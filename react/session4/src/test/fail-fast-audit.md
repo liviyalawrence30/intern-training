@@ -1,15 +1,21 @@
 ## section 1 - Task 1.2
 1.
-In src/hooks/useInternSearch.ts:52 , the average score may be returned as 0 when the data is not present.
-Risk: It may look like a valid value , hides the insufficient data present.
+Pattern : Silent default
+File: src/hooks/useInternSearch.ts:52 
+Risk:The average score may be returned as 0 when the data is not present.
+It may look like a valid value  but it hides the insufficient data present.
 
 2.
-In src/hooks/useInternForm.ts:86,submit() returns false.
-Risk: If the caller ignores the return value, the form submission can fail without clearly indicating why.
+Pattern:Function returns without indicating failure.
+File: src/hooks/useInternForm.ts:86
+Risk:submit() returns false.
+If the caller ignores the return value, the form submission can fail without clearly indicating why.
 
 3.
-In src/contexts/intern-context.ts : 54, generateId() uses intern.length+1
-Risk:Removing an intern can lead to duplicate IDs.
+Pattern: Silent default
+File : src/contexts/intern-context.ts : 54
+Risk:generateId() uses intern.length+1.
+Removing an intern can lead to duplicate IDs.
 
 ## section 2 - Task 2.1
 I couldn't find any function that returned null or undefined to indicate an error, so there were no callers to update.
@@ -46,4 +52,39 @@ If the inputis missing or the type is wrong , the function exits immediately bef
 
 It was easier to test this way because we can just pass different inputs and check the returned result.
 Testing through hooks and components require more setup.
+
+## section 4 - Task 4.1
+
+## Error Message Audit
+
+| File | Current message | Answers all 3 questions? | Improved message |
+|------|----------------|--------------------------|-----------------|
+intern-context.ts | useInterns must be used inside InternProvider|no|useInterns: expected to be used inside InternProvider, but no provider was found.|
+
+theme-context.ts|useTheme must be used inside ThemeProvider|no|useTheme: expected to be used inside ThemeProvider, but no provider was found.|
+
+## Task 4.2 -comment
+I improved the error messages. After running the tests, no errors. So no change in the function signature was done.
+
+# section 4 - task 4.3
+
+## 2am Test — useInterns
+
+Error message:
+"useInterns: expected to be used inside InternProvider, but no provider was found."
+
+What I know from this message alone:
+1. Which function failed: useInterns
+2.  What was expected: The hook should be used inside InternProvider.
+3. What actually happened: No provider was found.
+
+What I would do next without reading any code:
+1. Check where useInterns() is being called.
+2. Verify that the component is wrapped inside InternProvider.
+
+would the original message be enough?
+
+- No.The improved message clearly explains what was expected and what actually happened, 
+making it easier to identify the problem quickly.
+
 

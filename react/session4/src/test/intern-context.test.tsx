@@ -50,3 +50,13 @@ test('explore: adds an intern using the real provider', () => {
   expect(result.current.interns.at(-1)?.role).toBe('Frontend')
   expect(result.current.interns.at(-1)?.isPresent).toBe(true)
 })
+
+
+describe('useInterns', () => {
+  test('throws a descriptive error when used outside InternProvider', () => {
+    expect(() => renderHook(() => useInterns())).toThrow(
+      'useInterns: expected to be used inside InternProvider, but no provider was found.'
+    )
+  })
+})
+
