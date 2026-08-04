@@ -63,6 +63,9 @@ intern-context.ts | useInterns must be used inside InternProvider|no|useInterns:
 
 theme-context.ts|useTheme must be used inside ThemeProvider|no|useTheme: expected to be used inside ThemeProvider, but no provider was found.|
 
+config.ts| config: APP_NAME is required.|no|config: expected APP_NAME to be defined, but no value was found.
+
+
 ## Task 4.2 -comment
 I improved the error messages. After running the tests, no errors. So no change in the function signature was done.
 
@@ -106,3 +109,20 @@ The checks run at import time when the configuration file is loaded.
 Failing at import time is better than because configuration failures are detected immediately when the application starts
 instead of causing errors later when the configuration is used.
 
+# explore
+## 1.
+submit() assumes that validateInternForm() always returns a valid result.
+Adding assertions ensures invalid inputs are detected immediately instead of allowing unexpected values to propagate.
+
+## 2.
+the postcondition is added in utils/ postcondition.ts
+The post condition assertion immediately detected that the function returned an unsorted array.
+
+## 3.
+TypeScript prop type errors are fail-fast because they catch problems early. 
+Missing key warnings and React warnings are fail-slow because the app continues running while showing a warning.
+
+## 4.
+Result<T, E> returns either a success value or an error instead of throwing. 
+It is fail-fast because the caller must handle the error explicitly. 
+It is a better choice when errors are expected, such as validation or API responses.

@@ -2,7 +2,7 @@ const APP_NAME = 'Intern Dashboard'
 
 if (!APP_NAME) {
   throw new Error(
-    'config: APP_NAME is required.'
+    'config: expected APP_NAME to be defined, but no value was found.'
   )
 }
 
