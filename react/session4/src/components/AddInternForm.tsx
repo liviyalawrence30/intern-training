@@ -1,3 +1,7 @@
+// BEFORE: This file rendered the form and handled the form logic.
+// AFTER:  This file renders the form and passes user actions to the form hook.
+
+
 //Job: This file renders the addinternform and connects the user interface to handle logic.
 //Concerns mixed:UI rendering and logic handling.
 

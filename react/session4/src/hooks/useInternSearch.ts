@@ -1,3 +1,6 @@
+// BEFORE: This file manages the intern search functionality, including filtering and statistics calculation.
+// AFTER:  This hook manages search state and filters interns.
+
 //Job: This file manages the intern search functionality, including filtering and statistics calculation.
 //concerns mixed: search state management, filtering logic and statistics calculation.
 

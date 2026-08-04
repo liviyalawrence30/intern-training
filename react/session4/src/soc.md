@@ -52,4 +52,48 @@ After the refactoring , useInternForm.ts is a wiring layer. It connects the UI w
 I think it is a coordination hook because it communicates between the UI and the service.
 It manages the form state, calls the validation service and performs submission through the injected addIntern() function .
 
+# section 6 
+## Task 6.1
 
+Add internform.tsx
+  |
+  calls the useInternForm(hook)
+      |
+      calls the validateInternForm(intern-service)
+      |
+      calls the addIntern(injected from intern provider)
+            |
+            InternProvider
+                |
+                calls createIntern(intern-service)
+                |
+                calls repo.add(intern-repository)
+                    |
+                    updates the intern state
+
+ScoreStats
+    |
+    gets interns from internProvider
+        |
+        calculates statistics
+            |
+            passes props to scorestats
+
+
+InternProvider
+    |
+    calls useIntern repository
+        |
+        manages intern state
+    |
+    calls the intern service
+        |
+        createIntern
+        | 
+        calculate the average score
+### comment
+There are no upward dependencies.
+
+## task 6.2
+Yes.
+In Scorestats.tsx, the average score logic  is in intern-service but the highest,passing calculations are in  scorestats. So it's a little harder to be described in 1 sentence.

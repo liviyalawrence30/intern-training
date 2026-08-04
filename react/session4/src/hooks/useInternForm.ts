@@ -1,7 +1,8 @@
+// BEFORE:This file manages the intern form.
+// AFTER:This hook manages the form and coordinates validation and submission.
+
 //Job: This file handles the intern form by handling inputs, validating data, handling errors and submission
 //Concerns mixed: form state management, validation, error handling, submission logic
-
-
 
 /// Silent failure audit - useInternForm.ts
 // Pattern 1: submit() returns false on validation failure instead of throwing an error.
