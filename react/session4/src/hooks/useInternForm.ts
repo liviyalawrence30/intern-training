@@ -1,3 +1,8 @@
+//Job: This file handles the intern form by handling inputs, validating data, handling errors and submission
+//Concerns mixed: form state management, validation, error handling, submission logic
+
+
+
 /// Silent failure audit - useInternForm.ts
 // Pattern 1: submit() returns false on validation failure instead of throwing an error.
 // Pattern 2: setError(errorMessage ?? '') silently converts a null validation result to an empty string.

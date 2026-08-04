@@ -1,3 +1,7 @@
+// Job: This file calculates and displays the score statistics of interns, including highest, lowest, average scores and the number of passing interns.
+// Concerns mixed: Statistics calculation, data display, context integration.
+
+
 //Testability audit - ScoreStats.tsx
 //yes, given the same interns array, it always produces the same statistics.
 //Partially,The component depends on the React Context (useInterns) to get its data, but it does not use APIs, timers, or browser APIs.

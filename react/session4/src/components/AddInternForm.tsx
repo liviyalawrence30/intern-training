@@ -1,3 +1,6 @@
+//Job: This file renders the addinternform and connects the user interface to handle logic.
+//Concerns mixed:UI rendering and logic handling.
+
 import useInternForm from '../hooks/useInternForm'
 import { useInterns } from '../contexts/intern-context'
 
