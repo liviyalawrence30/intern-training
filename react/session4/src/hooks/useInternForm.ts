@@ -1,7 +1,6 @@
-//Silent failure audit - useInternForm.ts
-// pattern 1 : No explicit error handling for API calls or asynchronous operations ,submit() returns false on validation failure instead of throwing an error.
-//pattern 2 : setError(errorMessage ?? '') silently converts a null validation result to an empty string.
-
+/// Silent failure audit - useInternForm.ts
+// Pattern 1: submit() returns false on validation failure instead of throwing an error.
+// Pattern 2: setError(errorMessage ?? '') silently converts a null validation result to an empty string.
 
 /* 
 Testability audit - useInternForm.ts
@@ -65,14 +64,19 @@ function useInternForm(
         : value
 
   const nextForm = {
-    ...form,
-    [name]: updatedValue,
-  }
+  ...form,
+  [name]: updatedValue,
+}
 
-  setForm(nextForm)
+const errorMessage = validateInternForm(nextForm.name, nextForm.score)
 
-  const errorMessage = validateInternForm(nextForm.name, nextForm.score)
-  setError(errorMessage ?? '')
+if (errorMessage) {
+  setError(errorMessage)
+  return
+}
+
+setError('')
+setForm(nextForm)
 }
 function handleReset(): void {
   setForm(initialForm)

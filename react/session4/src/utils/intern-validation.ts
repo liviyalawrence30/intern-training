@@ -5,6 +5,15 @@ export function validateInternForm(
   name: string,
   score: number
 ): string | null {
+
+  if (name == null) {
+    return 'Name is required'
+  }
+
+  if (typeof name !== 'string' || typeof score !== 'number') {
+    return 'Invalid input'
+  }
+
   if (!name.trim()) {
     return 'Name is required'
   }
