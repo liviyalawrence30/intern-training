@@ -32,3 +32,24 @@ It handles state management, data validation,data loading, context provider and 
  2. When the container calls the service, the presentational component can be tested easily by passing the props. It is easier than directly calling the service.
 
 
+# section 5 
+## task 5.1
+ File | Expected layer | Actual concerns | Correct? |
+|------|---------------|----------------|---------|
+| `src/components/ScoreStats.tsx` | UI |displays the score statistics | yes|
+| `src/components/AddInternForm.tsx` | UI | renders the form and handles the user inputs.|yes |
+| `src/components/ThemedCard.tsx` | UI | displays the intern-info| yes|
+| `src/hooks/useInternForm.ts` | Service + UI (hook) |form state management, validation, calls context |yes |
+| `src/hooks/useInternSearch.ts` | Service + UI (hook) |filtering and state | yes|
+| `src/contexts/intern-context.tsx` | Wiring (context) |connects the service and repository layers | yes|
+| `src/services/intern-service.ts` | Service | business logic, filters, validation,search,intern creation|yes |
+| `src/repositories/intern-repository.ts` | Repository | state management for interns|yes |
+
+### comment
+After the refactoring , useInternForm.ts is a wiring layer. It connects the UI with the service and context.
+
+## task 5.2
+I think it is a coordination hook because it communicates between the UI and the service.
+It manages the form state, calls the validation service and performs submission through the injected addIntern() function .
+
+
