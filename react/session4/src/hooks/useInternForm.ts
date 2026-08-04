@@ -1,3 +1,8 @@
+//Silent failure audit - useInternForm.ts
+// pattern 1 : No explicit error handling for API calls or asynchronous operations ,submit() returns false on validation failure instead of throwing an error.
+//pattern 2 : setError(errorMessage ?? '') silently converts a null validation result to an empty string.
+
+
 /* 
 Testability audit - useInternForm.ts
 Yes - given the same form state and the same user input, it always produce the same result.
@@ -102,3 +107,7 @@ function handleReset(): void {
 }
 
 export default useInternForm
+
+//The most likely silent failure is submit() returning false.
+//Because the caller may ignore the return value making it difficult to know why the submission failed.
+
