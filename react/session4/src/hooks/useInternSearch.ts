@@ -12,7 +12,7 @@ Pattern 1: The average score defaults to 0 when the interns list is empty, which
 //yes, It does not use APIs,timers,browser storage, or other external services.It only uses react state and memoization.
 //yes,The interns data is passed as a parameter, and the search value can be controlled through the hook's setter.
 //Verdict: Highly testable.
-import { filterInterns } from '../utils/intern-utils'
+import { filterInterns } from '../services/intern-service'
 import { useState, useMemo } from 'react'
 
 interface Intern {

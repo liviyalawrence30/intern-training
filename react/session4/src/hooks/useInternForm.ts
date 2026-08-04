@@ -15,7 +15,7 @@ Partially - validation logic depends on the hook's internal React state instead 
 Verdict : Moderately testable
 */
 
-import { validateInternForm } from '../utils/intern-validation'
+import { validateInternForm } from '../services/intern-service'
 import { useState } from 'react'
 
 interface InternFormState {
