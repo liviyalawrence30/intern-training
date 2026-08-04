@@ -24,4 +24,11 @@ It handles state management, data validation,data loading, context provider and 
 2. It should be in utility or hook.
 3. Business logic should be separate.
 
+# section 4 
+## Task 4.2
+ 1. A presentational component should not import from the service layer directly.
+ The container component should call the service and pass the result as props.
+
+ 2. When the container calls the service, the presentational component can be tested easily by passing the props. It is easier than directly calling the service.
+
 
