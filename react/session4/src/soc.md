@@ -55,6 +55,8 @@ It manages the form state, calls the validation service and performs submission 
 # section 6 
 ## Task 6.1
 
+### diagram 
+
 Add internform.tsx
   |
   calls the useInternForm(hook)
@@ -97,3 +99,13 @@ There are no upward dependencies.
 ## task 6.2
 Yes.
 In Scorestats.tsx, the average score logic  is in intern-service but the highest,passing calculations are in  scorestats. So it's a little harder to be described in 1 sentence.
+
+# explore
+## 1.
+I modified ScoreStats to include the logic in intern-service.ts
+I didn't change any other layer.
+## 4.
+internService.ts has 90 percent coverage . It is not the highest.
+It is easier to test because it contains pure functions - business logic.
+
+

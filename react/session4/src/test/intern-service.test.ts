@@ -6,6 +6,7 @@ import {
   getScoreLabel,
   filterInterns,
 } from '../services/intern-service'
+import type { Intern } from '../types/intern'
 
 describe('createIntern', () => {
   it('generates an id', () => {
@@ -161,3 +162,13 @@ describe('filterInterns', () => {
     expect(filterInterns(interns, 'frontend')).toHaveLength(1)
   })
 })
+
+//explore tests:
+export function sortInternsByScore(
+  interns: Intern[],
+  order: 'asc' | 'desc'
+): Intern[] {
+  return [...interns].sort((a, b) =>
+    order === 'asc' ? a.score - b.score : b.score - a.score
+  )
+}

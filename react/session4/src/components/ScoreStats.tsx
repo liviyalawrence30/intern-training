@@ -13,9 +13,7 @@
 //no,The interns data comes directly from the context instead of being passed as props, making it harder to test in isolation.
 //verdict: Moderately testable.
 
-
-
-
+import { sortInternsByScore } from '../services/intern-service'
 import { useMemo } from 'react'
 import { useInterns } from '../contexts/intern-context'
 
@@ -44,6 +42,10 @@ export function ScoreStats({
 
 export function ScoreStatsContainer() {
   const { interns } = useInterns()
+  const sortedInterns = useMemo(
+  () => sortInternsByScore(interns, 'desc'),
+  [interns]
+)
 
   const stats = useMemo(() => {
     const scores = interns.map(i => i.score)
@@ -60,7 +62,19 @@ export function ScoreStatsContainer() {
     }
   }, [interns])
 
-  return <ScoreStats {...stats} />
+  return (
+  <>
+    <ScoreStats {...stats} />
+
+    <ul>
+      {sortedInterns.map(intern => (
+        <li key={intern.id}>
+          {intern.name} - {intern.score}
+        </li>
+      ))}
+    </ul>
+  </>
+)
 }
 
 export default ScoreStatsContainer

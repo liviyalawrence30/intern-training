@@ -78,3 +78,12 @@ The service layer should not have any react imports.
 It contains only business logic and should be independent of the UI framework.
 If it imported react, the tests would need react specific setup .
 */
+
+export function sortInternsByScore(
+  interns: Intern[],
+  order: 'asc' | 'desc'
+): Intern[] {
+  return [...interns].sort((a, b) =>
+    order === 'asc' ? a.score - b.score : b.score - a.score
+  )
+}
