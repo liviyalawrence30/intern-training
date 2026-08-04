@@ -1,17 +1,24 @@
 //Silent failure audit - intern-validation.ts
 // No silent failure patterns found.
+import { assert } from './assert'
 
 export function validateInternForm(
   name: string,
   score: number
 ): string | null {
 
+  assert(
+    typeof name === 'string',
+    `validateInternForm: name must be a string, got: ${typeof name}`
+  )
+
+  assert(
+    typeof score === 'number',
+    `validateInternForm: score must be a number, got: ${typeof score}`
+  )
+
   if (name == null) {
     return 'Name is required'
-  }
-
-  if (typeof name !== 'string' || typeof score !== 'number') {
-    return 'Invalid input'
   }
 
   if (!name.trim()) {
@@ -24,5 +31,7 @@ export function validateInternForm(
 
   return null
 }
-
 //This file already follows fail-fast principles.
+
+
+

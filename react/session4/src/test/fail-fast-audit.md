@@ -87,4 +87,13 @@ would the original message be enough?
 - No.The improved message clearly explains what was expected and what actually happened, 
 making it easier to identify the problem quickly.
 
+## section 5 - task 5.2
+assert checks the throw immediately when the function is called with the invalid input types.
+It throws unconditionally because they detect the programming errors.
+The validation logic handles the expected user input errors by returning validation messages , allowing the user to fix the input.
+
+## section 5 - task 5.3
+The post condition is mostly documentation.The filter() always returns an array.
+It is useful when the implementation changes later , helping to detect the unexpected behaviour. 
+
 
