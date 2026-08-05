@@ -8,11 +8,23 @@
 import { assert } from './assert'
 const MIN_SCORE = 0
 const MAX_SCORE = 100
+function validateName(name: string): string | null {
+  if (!name?.trim()) {
+    return 'Name is required'
+  }
+  return null
+}
+
+function validateScore(score: number): string | null {
+  if (score < MIN_SCORE || score > MAX_SCORE) {
+    return 'Score must be 0–100'
+  }
+  return null
+}
 export function validateInternForm(
   name: string,
   score: number
 ): string | null {
-
   assert(
     typeof name === 'string',
     `validateInternForm: name must be a string, got: ${typeof name}`
@@ -23,19 +35,12 @@ export function validateInternForm(
     `validateInternForm: score must be a number, got: ${typeof score}`
   )
 
-  if (name == null) {
-    return 'Name is required'
+  const nameError = validateName(name)
+  if (nameError) {
+    return nameError
   }
 
-  if (!name.trim()) {
-    return 'Name is required'
-  }
-
-  if (score < MIN_SCORE || score > MAX_SCORE) {
-    return 'Score must be 0–100'
-  }
-
-  return null
+  return validateScore(score)
 }
 //This file already follows fail-fast principles.
 

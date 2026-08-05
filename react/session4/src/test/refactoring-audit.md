@@ -56,3 +56,28 @@ It makes the code easier to read than nested if clauses.
 ## Task 5.2
 I searched the project for long 'if/else if' chains using 'grep -R "else if" src' but did not find any. 
 So,I created new files like src/utils/role-label.ts and src/test/role-label-test.ts for this activity.
+# section 6
+## task 6.1
+
+## Full Refactoring Log 
+file: intern-validation.ts
+function name: validateInternForm
+
+Step 1: Ran 'npm run test:run' and confirmed all tests were passing.
+Step 2: Extracted the name validation into a separate 'validateName()' function and ran the tests again.
+Step 3: Extracted the score validation into a separate 'validateScore()' function and ran the tests again.
+Step 4: Updated `validateInternForm()` to use the new helper functions and ran the tests one final time.
+
+Final: Completed 3 refactoring changes. All test runs passed successfully.
+
+### comment
+I ran the tests 4 times in total. I didn't see a red result.
+
+## task 6.2
+| Metric | Before refactoring | After refactoring |
+|--------|--------------------|-------------------|
+| Statement % | 82.35%| 82.35%|
+| Branch % |76.19% |76.19% |
+| Function % |74.57% | 74.57%|
+
+The coverage stayed almost same because I only improved the structure of the code.
