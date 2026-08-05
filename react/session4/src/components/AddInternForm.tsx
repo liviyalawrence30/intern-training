@@ -1,15 +1,21 @@
+// BEFORE: This file rendered the form and handled the form logic.
+// AFTER:  This file renders the form and passes user actions to the form hook.
+
+
+//Job: This file renders the addinternform and connects the user interface to handle logic.
+//Concerns mixed:UI rendering and logic handling.
+
 import useInternForm from '../hooks/useInternForm'
 import { useInterns } from '../contexts/intern-context'
 
 function AddInternForm() {
-  const { form, error, handleChange, handleReset, isValid } = useInternForm()
-  const { addIntern, interns } = useInterns()
+  const { addIntern } = useInterns()
+  const { form, error, handleChange, handleReset, submit } = useInternForm(addIntern)
+  
 
   function handleSubmit(): void {
-    if (!isValid()) return
-    addIntern({ id: interns.length + 1, ...form })
-    handleReset()
-  }
+  submit()
+}
 
   return (
     <div>
