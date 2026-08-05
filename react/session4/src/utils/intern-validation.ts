@@ -6,7 +6,8 @@
 //Silent failure audit - intern-validation.ts
 // No silent failure patterns found.
 import { assert } from './assert'
-
+const MIN_SCORE = 0
+const MAX_SCORE = 100
 export function validateInternForm(
   name: string,
   score: number
@@ -29,8 +30,7 @@ export function validateInternForm(
   if (!name.trim()) {
     return 'Name is required'
   }
-const MIN_SCORE = 0
-const MAX_SCORE = 100
+
   if (score < MIN_SCORE || score > MAX_SCORE) {
     return 'Score must be 0–100'
   }

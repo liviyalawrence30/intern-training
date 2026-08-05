@@ -46,3 +46,13 @@ It is extracted into validateForm() ,removing the duplicate logic and making the
 ## task 4.2
 I was using constants for the interns.Now, I replaced them with a test factory.
 A test factory could make the tests easier to read by allowing each test to override only the fields it needs.
+
+# section 5
+## task 5.1
+After refactoring, guard clauses were already present .
+It makes the code easier to read than nested if clauses.
+
+## task 5.2
+## Task 5.2
+I searched the project for long 'if/else if' chains using 'grep -R "else if" src' but did not find any. 
+So,I created new files like src/utils/role-label.ts and src/test/role-label-test.ts for this activity.
