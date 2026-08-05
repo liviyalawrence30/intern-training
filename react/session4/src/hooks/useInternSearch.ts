@@ -1,3 +1,8 @@
+//code smell audit- useInternSearch.ts
+//1. Mixed responsibilities - the hook manages search state, filtering logic, and statistics calculation.
+//2. Duplicate iteration - the interns array is traversed multiple times to calculate statistics.
+//3. Magic value- average score defaults to 0 when no interns are available.
+
 // BEFORE: This file manages the intern search functionality, including filtering and statistics calculation.
 // AFTER:  This hook manages search state and filters interns.
 
@@ -77,3 +82,5 @@ The filtered list updates only when interns, search  or filter changes.
 
 // The average score defaulting to 0 is the most likely silent failure 
 // because it can make an empty list look like a valid average score instead of indicating that no data exists.
+
+//I would seperate the multiple responsibilities first because it would make the code more easier to read.

@@ -1,3 +1,9 @@
+//code smell audit - useInternForm.ts
+//1.Long function - submit performsthe validation, reset, calls addintern()
+//2. Multiple responsibilities - the hook manages form state, validation, error handling, and submission logic.
+
+
+
 // BEFORE:This file manages the intern form.
 // AFTER:This hook manages the form and coordinates validation and submission.
 
@@ -121,3 +127,4 @@ export default useInternForm
 //The most likely silent failure is submit() returning false.
 //Because the caller may ignore the return value making it difficult to know why the submission failed.
 
+//I would seperate the multiple responsibilities first because it would make the code more easier to read.

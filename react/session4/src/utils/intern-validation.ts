@@ -1,3 +1,8 @@
+//code smell audit - intern-validation.ts
+//1. Magic numbers - the score validation uses values 0 and 100 directly instead of defining them as constants.
+//2. // Smell 2: Duplicate error message — both name validation checks return the same "Name is required" message.
+//3. Multiple responsibilities — validateInternForm checks type validation, name validation, and score validation in a single function.
+
 //Silent failure audit - intern-validation.ts
 // No silent failure patterns found.
 import { assert } from './assert'
@@ -33,5 +38,5 @@ export function validateInternForm(
 }
 //This file already follows fail-fast principles.
 
-
+//I would fix the duplicate logic first because it would make the code more easier to read and maintain.
 

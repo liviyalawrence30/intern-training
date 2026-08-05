@@ -1,3 +1,8 @@
+//code smell audit- intern-context.tsx
+//1.Mixed responsibilities- the context wires together the repository and service layers while exposing the application state.
+//2. Large object construction - the context value combines multiple responsibilities in one place.
+//3. Tight coupling - the context depends directly on both the repository and service layers. 
+
 //Job : This file manages the intern data.
 //concerns mixed: state management, data validation,data loading, context provider and ID generation.
 
@@ -70,3 +75,6 @@ export function useInterns(): InternContextValue {
 
 //The intern provider has 11 lines of code now. Before, it was around 20 lines.
 //Yes. I would change the createIntern() function in src/services/intern-service.ts.
+
+
+//I would fix the tight coupling first because it would make the code more easier to read and maintain.
