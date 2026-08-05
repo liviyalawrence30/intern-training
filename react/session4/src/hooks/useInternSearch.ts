@@ -59,9 +59,9 @@ function useInternSearch(
 )
   const stats = useMemo(() => ({
     total:   interns.length,
-    present: interns.filter(i => i.isPresent).length,
+    present: interns.filter(intern => intern.isPresent).length,
     avg:     interns.length > 0
-      ? Math.round(interns.reduce((s, i) => s + i.score, 0) / interns.length)
+      ? Math.round(interns.reduce((totalScore, intern) => totalScore + intern.score, 0) / interns.length)
       : 0,
   }), [interns])
 

@@ -12,3 +12,21 @@ Because the hook manages search state, filtering logic, and statistics calculati
 Reason:
 Because the context depends directly on both the repository and service layers. 
 It increases dependency.
+
+# section 2 
+## task 2.1
+
+In useInternSearch.ts,
+old name : i
+new name: intern 
+old name : s
+new name: totalScore
+
+The new names provide better meaning.
+
+In intern-context.tsx
+old name : repo
+new name:internRepository
+The new name indicates the specific intern repository
+
+

@@ -29,8 +29,9 @@ export function validateInternForm(
   if (!name.trim()) {
     return 'Name is required'
   }
-
-  if (score < 0 || score > 100) {
+const MIN_SCORE = 0
+const MAX_SCORE = 100
+  if (score < MIN_SCORE || score > MAX_SCORE) {
     return 'Score must be 0–100'
   }
 
@@ -40,3 +41,7 @@ export function validateInternForm(
 
 //I would fix the duplicate logic first because it would make the code more easier to read and maintain.
 
+
+//Task 2.2
+//The score validation check had 0 and 100.
+//I defined them as constants MIN_SCORE and MAX_SCORE to avoid magic numbers and improve code readability.

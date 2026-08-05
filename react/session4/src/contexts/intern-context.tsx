@@ -36,18 +36,18 @@ interface InternContextValue {
 const InternContext = createContext<InternContextValue | null>(null)
 
 export function InternProvider({ children }: { children: ReactNode }) {
-  const repo = useInternRepository()
+  const internRepository = useInternRepository()
 
   const value: InternContextValue = {
-    interns: repo.interns,
-    averageScore: calculateAverageScore(repo.interns),
+    interns: internRepository.interns,
+    averageScore: calculateAverageScore(internRepository.interns),
 
     addIntern: (form: InternFormState) => {
       const intern = createIntern(form)
-      repo.add(intern)
+      internRepository.add(intern)
     },
 
-    removeIntern: (id: number) => repo.remove(id),
+    removeIntern: (id: number) => internRepository.remove(id),
   }
 
   return (
