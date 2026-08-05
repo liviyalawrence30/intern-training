@@ -81,3 +81,14 @@ I ran the tests 4 times in total. I didn't see a red result.
 | Function % |74.57% | 74.57%|
 
 The coverage stayed almost same because I only improved the structure of the code.
+
+# explore
+# 1.
+I could see the long functions, duplicate logic and incorrect naming of variables easily.
+# 2.
+The tests still passed.This shows me that tests verify the behaviour , not the naming conditions.
+# 3.
+Guard classes made it cleaner and reduced the nesting conditions.
+# 4.
+## Explore 4
+I checked my Git history and found that my refactoring and other changes were already in separate commits. 
