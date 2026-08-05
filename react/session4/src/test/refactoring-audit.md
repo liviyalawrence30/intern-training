@@ -29,4 +29,12 @@ old name : repo
 new name:internRepository
 The new name indicates the specific intern repository
 
+## task 3.3
+In useInternForm.ts,
+Before refactoring:
+The original 'handlechange()' function was doing: validation, converts input value,update the form and state.
+
+After refactoring:
+validateAndupdateForm() validates and updates the state.
+handlechange() focuses on processing .
 

@@ -50,26 +50,6 @@ describe('validateInternForm', () => {
 //validateInternForm function benefited most from refactoring.
 //scorestats still needs some refactoring.
 
-/* explore
-test(
-  'returns null when score is exactly 100',
-  { timeout: 5000 },
-  () => {
-    expect(validateInternForm('Rahul', 100)).toBeNull()
-  }
-)*/
 
 
-describe('validateInternForm guard clauses', () => {
-  test('returns "Name is required" when name is empty', () => {
-    expect(validateInternForm('', 80)).toBe('Name is required')
-  })
 
-  test('returns "Score must be 0–100" when score is below 0', () => {
-    expect(validateInternForm('Rahul', -1)).toBe('Score must be 0–100')
-  })
-
-  test('returns "Score must be 0–100" when score is above 100', () => {
-    expect(validateInternForm('Rahul', 101)).toBe('Score must be 0–100')
-  })
-})

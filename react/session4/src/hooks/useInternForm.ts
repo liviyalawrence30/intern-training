@@ -60,32 +60,52 @@ function useInternForm(
 ): UseInternFormReturn {
   const [form,  setForm]  = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>('')
+function getUpdatedValue(
+  name: string,
+  value: string,
+  type: string,
+  target: HTMLInputElement | HTMLSelectElement
+) {
+  if (type === 'checkbox') {
+    return (target as HTMLInputElement).checked
+  }
 
- 
+  if (name === 'score') {
+    return Number(value)
+  }
+
+  return value
+}
+ function validateAndUpdateForm(nextForm: InternFormState): void {
+  const errorMessage = validateInternForm(nextForm.name, nextForm.score)
+
+  if (errorMessage) {
+    setError(errorMessage)
+    return
+  }
+
+  setError('')
+  setForm(nextForm)
+}
 
   function handleChange(
   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
 ): void {
   const { name, value, type } = e.target
 
-  const updatedValue =
-    type === 'checkbox'
-      ? (e.target as HTMLInputElement).checked
-      : name === 'score'
-        ? Number(value)
-        : value
+  const updatedValue = getUpdatedValue(
+  name,
+  value,
+  type,
+  e.target
+)
 
   const nextForm = {
   ...form,
   [name]: updatedValue,
 }
 
-const errorMessage = validateInternForm(nextForm.name, nextForm.score)
-
-if (errorMessage) {
-  setError(errorMessage)
-  return
-}
+validateAndUpdateForm(nextForm)
 
 setError('')
 setForm(nextForm)
