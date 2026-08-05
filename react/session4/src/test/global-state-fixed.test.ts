@@ -32,6 +32,16 @@ test('cart is empty again', () => {
   const cart: string[] = []
   expect(cart).toHaveLength(0)
 })
+test('can remove an item', () => {
+  let cart: string[] = []
+
+  cart = addItem(cart, 'Rahul')
+  cart = addItem(cart, 'Priya')
+
+  cart = removeItem(cart, 'Rahul')
+
+  expect(cart).toEqual(['Priya'])
+})
 
 /*
 FIRST principle

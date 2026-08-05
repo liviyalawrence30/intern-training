@@ -38,3 +38,11 @@ After refactoring:
 validateAndupdateForm() validates and updates the state.
 handlechange() focuses on processing .
 
+## task 4.1
+In useInternForm.ts,the validation logic was duplicated in handlechange() and submit().
+Leaving this duplication provides inconsistent behaviour. 
+It is extracted into validateForm() ,removing the duplicate logic and making the code easier to read and maintain.
+
+## task 4.2
+I was using constants for the interns.Now, I replaced them with a test factory.
+A test factory could make the tests easier to read by allowing each test to override only the fields it needs.

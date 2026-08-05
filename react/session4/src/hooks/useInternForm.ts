@@ -60,6 +60,7 @@ function useInternForm(
 ): UseInternFormReturn {
   const [form,  setForm]  = useState<InternFormState>(initialForm)
   const [error, setError] = useState<string>('')
+
 function getUpdatedValue(
   name: string,
   value: string,
@@ -76,16 +77,17 @@ function getUpdatedValue(
 
   return value
 }
- function validateAndUpdateForm(nextForm: InternFormState): void {
+ function validateForm(nextForm: InternFormState): Boolean {
   const errorMessage = validateInternForm(nextForm.name, nextForm.score)
 
   if (errorMessage) {
     setError(errorMessage)
-    return
+    return false
   }
 
   setError('')
   setForm(nextForm)
+  return true
 }
 
   function handleChange(
@@ -105,33 +107,29 @@ function getUpdatedValue(
   [name]: updatedValue,
 }
 
-validateAndUpdateForm(nextForm)
-
-setError('')
+if(!validateForm(nextForm)){
+  return 
+}
 setForm(nextForm)
+
 }
 function handleReset(): void {
   setForm(initialForm)
   setError('')
 }
  function submit(): boolean {
-  const errorMessage = validateInternForm(form.name, form.score)
+    if (!validateForm(form)) {
+      return false
+    }
 
-  if (errorMessage) {
-    setError(errorMessage)
-    return false
+    addIntern({
+      id: generateId(),
+      ...form,
+    })
+
+    handleReset()
+    return true
   }
-
-  addIntern({
-    id: generateId(),
-    ...form,
-  })
-
-  setError('')
-  handleReset()
-
-  return true
-}
 
   return {
   form,

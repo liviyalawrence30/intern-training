@@ -3,28 +3,7 @@ import { renderHook ,act} from '@testing-library/react'
 import { InternProvider, useInterns } from '../contexts/intern-context'
 
 
-// //describe('InternProvider', () => {
-//   test('adds an intern with injected id', () => {
-//     const wrapper = ({ children }: { children: React.ReactNode }) => (
-//       <InternProvider generateId={() => 999}>
-//         {children}
-//       </InternProvider>
-//     )
 
-//     const { result } = renderHook(() => useInterns(), { wrapper })
-
-//     act(() => {
-//       result.current.addIntern({
-//         name: 'Maria',
-//         score: 95,
-//         role: 'Frontend',
-//         isPresent: true,
-//       })
-//     })
-
-//     expect(result.current.interns.at(-1)?.id).toBe(999)
-//   })
-// })
 //Injecting generateId makes the code easier to test because a fixed ID can be used during testing. 
 
 

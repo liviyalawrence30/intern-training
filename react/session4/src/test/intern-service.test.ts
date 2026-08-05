@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, test, expect } from 'vitest'
 import {
   createIntern,
   validateInternForm,
@@ -9,7 +9,7 @@ import {
 import type { Intern } from '../types/intern'
 
 describe('createIntern', () => {
-  it('generates an id', () => {
+  test('generates an id', () => {
     const intern = createIntern(
       {
         name: 'Maria',
@@ -23,7 +23,7 @@ describe('createIntern', () => {
     expect(intern.id).toBe(123)
   })
 
-  it('trims the name', () => {
+  test('trims the name', () => {
     const intern = createIntern(
       {
         name: '  Maria  ',
@@ -37,7 +37,7 @@ describe('createIntern', () => {
     expect(intern.name).toBe('Maria')
   })
 
-  it('rounds the score', () => {
+  test('rounds the score', () => {
     const intern = createIntern(
       {
         name: 'Maria',
@@ -53,25 +53,25 @@ describe('createIntern', () => {
 })
 
 describe('validateInternForm', () => {
-  it('returns error for empty name', () => {
+  test('returns error for empty name', () => {
     expect(validateInternForm('', 80)).toBe('Name is required')
   })
 
-  it('returns error for score above 100', () => {
+  test('returns error for score above 100', () => {
     expect(validateInternForm('Maria', 120)).toBe('Score must be 0–100')
   })
 
-  it('returns null for valid data', () => {
+  test('returns null for valid data', () => {
     expect(validateInternForm('Maria', 90)).toBeNull()
   })
 })
 
 describe('calculateAverageScore', () => {
-  it('returns 0 for an empty list', () => {
+  test('returns 0 for an empty list', () => {
     expect(calculateAverageScore([])).toBe(0)
   })
 
-  it('returns the correct average', () => {
+  test('returns the correct average', () => {
     expect(
       calculateAverageScore([
         {
@@ -92,7 +92,7 @@ describe('calculateAverageScore', () => {
     ).toBe(90)
   })
 
-  it('rounds the average', () => {
+  test('rounds the average', () => {
     expect(
       calculateAverageScore([
         {
@@ -115,15 +115,15 @@ describe('calculateAverageScore', () => {
 })
 
 describe('getScoreLabel', () => {
-  it('returns Pass for 50', () => {
+  test('returns Pass for 50', () => {
     expect(getScoreLabel(50)).toBe('Pass')
   })
 
-  it('returns Fail for 49', () => {
+  test('returns Fail for 49', () => {
     expect(getScoreLabel(49)).toBe('Fail')
   })
 
-  it('returns Pass for 100', () => {
+  test('returns Pass for 100', () => {
     expect(getScoreLabel(100)).toBe('Pass')
   })
 })
@@ -146,19 +146,19 @@ describe('filterInterns', () => {
     },
   ]
 
-  it('returns all interns for an empty query', () => {
+  test('returns all interns for an empty query', () => {
     expect(filterInterns(interns, '')).toHaveLength(2)
   })
 
-  it('matches by name', () => {
+  test('matches by name', () => {
     expect(filterInterns(interns, 'Maria')).toHaveLength(1)
   })
 
-  it('matches by role', () => {
+  test('matches by role', () => {
     expect(filterInterns(interns, 'Backend')).toHaveLength(1)
   })
 
-  it('is case-insensitive', () => {
+  test('is case-insensitive', () => {
     expect(filterInterns(interns, 'frontend')).toHaveLength(1)
   })
 })

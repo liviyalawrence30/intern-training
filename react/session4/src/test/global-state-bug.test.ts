@@ -36,3 +36,11 @@ test('can add two items', () => {
 test('cart is empty again', () => {
   expect(cart).toHaveLength(0)
 })
+test('can remove an item', () => {
+  addItem('Rahul')
+  addItem('Priya')
+
+  removeItem('Rahul')
+
+  expect(cart).toEqual(['Priya'])
+})
