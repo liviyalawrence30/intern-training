@@ -1,11 +1,11 @@
-interface ISessionLogger {
+export interface ISessionLogger {
   recordAttendance(internId: number): void
   hasAttended(internId: number): boolean
   getAttendeeCount(): number
   getAttendeeIds(): readonly number[]
 }
 
-class SessionLogger implements ISessionLogger {
+export class SessionLogger implements ISessionLogger {
   #attendees = new Set<number>()
 
   recordAttendance(internId: number): void {
