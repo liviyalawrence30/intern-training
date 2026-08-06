@@ -1,6 +1,4 @@
-/* ==========================================================================
-   GLOBAL DESIGN TOKENS & RESET
-   ========================================================================== */
+
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
@@ -331,4 +329,4 @@ body.dark-theme .checkbox-grid label:hover {
 body.dark-theme .form-group label,
 body.dark-theme .booking-form label {
   color: #cbd5e1;
-}
+}
