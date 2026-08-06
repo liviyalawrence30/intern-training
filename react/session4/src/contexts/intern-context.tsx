@@ -1,51 +1,80 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+//code smell audit- intern-context.tsx
+//1.Mixed responsibilities- the context wires together the repository and service layers while exposing the application state.
+//2. Large object construction - the context value combines multiple responsibilities in one place.
+//3. Tight coupling - the context depends directly on both the repository and service layers. 
 
-interface Intern {
-  id: number; name: string; score: number; role: string; isPresent: boolean
-}
+//Job : This file manages the intern data.
+//concerns mixed: state management, data validation,data loading, context provider and ID generation.
 
-interface InternContextType {
-  interns:      Intern[]
-  isLoading:    boolean
-  addIntern:    (intern: Intern) => void
+//silent failure audit - intern-context.tsx
+// Pattern 1: setTimeout() simulates loading but has no error handling if loading fails.
+// Pattern 2: generateId() defaults to interns.length + 1, which could create duplicate IDs if interns are removed.
+// Pattern 3: The initial interns are hard-coded, so a loading or initialization failure cannot be detected.
+
+//Testability audit — intern-context.tsx
+//yes, given the same initial state and the same sequence of actions, it always produces the same result.
+//no,It uses useEffect and setTimeout, introducing asynchronous behavior that makes testing more complex.
+//no,The initial data and timeout are hard-coded inside the provider and cannot be passed in during tests.
+//verdict: Low testability.
+
+
+import { createContext, useContext, type ReactNode } from 'react'
+import { useInternRepository } from '../repositories/intern-repository'
+import {
+  createIntern,
+  calculateAverageScore,
+} from '../services'
+import type { Intern, InternFormState } from '../types/intern'
+
+interface InternContextValue {
+  interns: Intern[]
+  averageScore: number
+  addIntern: (form: InternFormState) => void
   removeIntern: (id: number) => void
 }
 
-const InternContext = createContext<InternContextType | null>(null)
+const InternContext = createContext<InternContextValue | null>(null)
 
 export function InternProvider({ children }: { children: ReactNode }) {
-  const [interns,   setInterns]   = useState<Intern[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const internRepository = useInternRepository()
 
-  useEffect(() => {
-    setTimeout(() => {
-      setInterns([
-        { id: 1, name: 'Rahul', score: 92, role: 'Frontend',  isPresent: true  },
-        { id: 2, name: 'Priya', score: 78, role: 'Backend',   isPresent: true  },
-        { id: 3, name: 'Amit',  score: 45, role: 'Frontend',  isPresent: false },
-        { id: 4, name: 'Sneha', score: 95, role: 'Fullstack', isPresent: true  },
-      ])
-      setIsLoading(false)
-    }, 800)
-  }, [])
+  const value: InternContextValue = {
+    interns: internRepository.interns,
+    averageScore: calculateAverageScore(internRepository.interns),
 
-  function addIntern(intern: Intern): void {
-    setInterns(prev => [...prev, intern])
-  }
+    addIntern: (form: InternFormState) => {
+      const intern = createIntern(form)
+      internRepository.add(intern)
+    },
 
-  function removeIntern(id: number): void {
-    setInterns(prev => prev.filter(i => i.id !== id))
+    removeIntern: (id: number) => internRepository.remove(id),
   }
 
   return (
-    <InternContext.Provider value={{ interns, isLoading, addIntern, removeIntern }}>
+    <InternContext.Provider value={value}>
       {children}
     </InternContext.Provider>
   )
 }
 
-export function useInterns(): InternContextType {
+export function useInterns(): InternContextValue {
   const context = useContext(InternContext)
-  if (!context) throw new Error('useInterns must be used inside InternProvider')
+
+  if (!context) {
+    throw new Error(
+      'useInterns: expected to be used inside InternProvider, but no provider was found.'
+    )
+  }
+
   return context
 }
+
+//The most likely silent failure is the generateId() using interns.length+1
+//If an intern is removed, the same ID could be generated again 
+//duplicate IDs are dificult to diagnose.
+
+//The intern provider has 11 lines of code now. Before, it was around 20 lines.
+//Yes. I would change the createIntern() function in src/services/intern-service.ts.
+
+
+//I would fix the tight coupling first because it would make the code more easier to read and maintain.
