@@ -15,6 +15,7 @@ Callers would not break because those implementation details are hidden inside t
 interface Intern {
   id: number
   name: string
+  score: number
 }
 
 class InternTracker {
@@ -47,6 +48,20 @@ class InternTracker {
   #updateCache(intern: Intern): void {
     this.#localCache.set(intern.id, intern)
   }
+  updateScore(internId: number, score: number): void {
+  if (score < 0 || score > 100) {
+    throw new RangeError('Score must be between 0 and 100')
+  }
+
+  const intern = this.#interns.find(i => i.id === internId)
+
+  if (!intern) {
+    throw new Error('Intern not found')
+  }
+
+  intern.score = score
+  this.#updateCache(intern)
+}
 }
 
 export type { Intern }
