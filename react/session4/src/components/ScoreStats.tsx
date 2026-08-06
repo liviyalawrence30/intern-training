@@ -13,7 +13,7 @@
 //no,The interns data comes directly from the context instead of being passed as props, making it harder to test in isolation.
 //verdict: Moderately testable.
 
-import { sortInternsByScore } from '../services/intern-service'
+import { sortInternsByScore } from '../services'
 import { useMemo } from 'react'
 import { useInterns } from '../contexts/intern-context'
 

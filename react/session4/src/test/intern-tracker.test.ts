@@ -1,5 +1,5 @@
 import { describe, it, expect,vi,beforeEach } from 'vitest'
-import { InternTracker } from '../services/intern-tracker'
+import { InternTracker } from '../services'
 beforeEach(() => {
   vi.stubGlobal(
     'fetch',

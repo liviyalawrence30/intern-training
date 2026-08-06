@@ -23,7 +23,7 @@ import { useInternRepository } from '../repositories/intern-repository'
 import {
   createIntern,
   calculateAverageScore,
-} from '../services/intern-service'
+} from '../services'
 import type { Intern, InternFormState } from '../types/intern'
 
 interface InternContextValue {

@@ -5,7 +5,7 @@ import {
   calculateAverageScore,
   getScoreLabel,
   filterInterns,
-} from '../services/intern-service'
+} from '../services'
 import type { Intern } from '../types/intern'
 
 describe('createIntern', () => {
