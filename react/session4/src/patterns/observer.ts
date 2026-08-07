@@ -1,8 +1,8 @@
-interface Observer {
+export interface Observer {
   update(data: unknown): void
 }
 
-class Subject {
+export class Subject {
   private observers: Observer[] = []
 
   subscribe(observer: Observer): void {
