@@ -1,5 +1,6 @@
 import { useInterns } from '../contexts/intern-context'
 import useInternSearch from '../hooks/useInternSearch'
+import { getScoreLabel } from '../utils/score-label'
 
 function InternSearch() {
   const { interns } = useInterns()
@@ -32,7 +33,12 @@ function InternSearch() {
         <div key={intern.id}>
           <p>{intern.name}</p>
           <p>{intern.role}</p>
-          <p>{intern.score}</p>
+          <p>
+  {intern.score}{' '}
+  <span>
+    {getScoreLabel(intern.score)}
+  </span>
+</p>
         </div>
       ))}
     </div>
