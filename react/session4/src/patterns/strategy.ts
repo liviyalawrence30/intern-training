@@ -116,3 +116,87 @@ console.log('By rating inline:', applySort(products, p => [...p].sort((a, b) => 
 I would use a class based strategy instead of function based when I need to store data or have multiple methods.
 eg: while calculating discount, I may need to store the default discount percentage, customer type etc.
 */
+
+//explore 3 
+
+class SortByField implements SortStrategy {
+  private field: 'price' | 'rating'
+  private direction: 'asc' | 'desc'
+
+  constructor(
+    field: 'price' | 'rating',
+    direction: 'asc' | 'desc'
+  ) {
+    this.field = field
+    this.direction = direction
+  }
+
+  sort(products: Product[]): Product[] {
+    return [...products].sort((a, b) => {
+      const result = a[this.field] - b[this.field]
+
+      return this.direction === 'asc'
+        ? result
+        : -result
+    })
+  }
+}
+
+catalogue.setStrategy(new SortByField('price', 'asc'))
+console.log(
+  'By price (configurable):',
+  catalogue.sort(products).map(p => p.name)
+)
+
+catalogue.setStrategy(new SortByField('rating', 'desc'))
+console.log(
+  'By rating (configurable):',
+  catalogue.sort(products).map(p => p.name)
+)
+
+/*
+A class can store configuration like the field and direction.
+A closure is simpler but a class is easier to reuse and extend.
+*/
+
+
+//explore 4
+
+class SortStrategyFactory {
+  static create(
+    type: 'name' | 'price' | 'rating' | 'popularity'
+  ): SortStrategy {
+    switch (type) {
+      case 'name':
+        return new SortByName()
+
+      case 'price':
+        return new SortByPrice()
+
+      case 'rating':
+        return new SortByRating()
+
+      case 'popularity':
+        return new SortByPopularity()
+    }
+  }
+}
+
+catalogue.setStrategy(SortStrategyFactory.create('price'))
+console.log(
+  '\nFactory + Strategy (price):',
+  catalogue.sort(products).map(p => p.name)
+)
+
+catalogue.setStrategy(SortStrategyFactory.create('rating'))
+console.log(
+  'Factory + Strategy (rating):',
+  catalogue.sort(products).map(p => p.name)
+
+)
+
+/*
+The factory creates the correct strategy object based on the given string.
+The caller does not need to know which strategy class to create .
+It makes the code easier to maintain.
+*/

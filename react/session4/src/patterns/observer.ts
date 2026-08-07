@@ -75,6 +75,31 @@ class EmailService implements Observer {
     )
   }
 }
+// explore 1 
+
+//class EmailService implements Observer {
+//   update(data: unknown): void {
+//     const payload = data as Order
+
+//     if (payload.total > 1000) {
+//       throw new Error('Email service failed')
+//     }
+
+//     console.log(
+//       `[EmailService] sending confirmation to ${payload.customerEmail}`
+//     )
+//   }
+// }
+//fix:
+// protected notify(data: unknown): void {
+//   this.observers.forEach(observer => {
+//     try {
+//       observer.update(data)
+//     } catch (error) {
+//       console.error(error)
+//     }
+//   })
+// }
 
 class AuditLog implements Observer {
   update(data: unknown): void {
